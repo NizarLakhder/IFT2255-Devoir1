@@ -14,7 +14,7 @@ title: Évaluation et tests
 
 ## Plan de test
 
-- Types de tests réalisés :
+- - Types de tests réalisés :
   - Tests unitaires
   - Tests d’intégration
   - Tests manuels
