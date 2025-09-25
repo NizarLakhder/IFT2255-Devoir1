@@ -16,7 +16,7 @@ title: Vue d'ensemble
 
 - **`M1`:** Nizar Lakhder (20229915) #nizarlk
 - **`M2`:** Alae aloui (20253423) #alae8804
-- **`M3`:** Membre 3 (matricule) #nom-utilisateur  
+- **`M3`:** Tarek Zerroug  (20293977) #tarek8720 
 - **`M4`:** Membre 4 (matricule) #nom-utilisateur
 
 ## Description du projet
