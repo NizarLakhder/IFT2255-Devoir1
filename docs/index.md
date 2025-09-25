@@ -14,8 +14,8 @@ title: Vue d'ensemble
 
 ## Équipe
 
-- **`M1`:** Tarek zerroug 20293977 #tarekzerroug
-- **`M2`:** Membre 2 (matricule) #nom-utilisateur
+- **`M1`:** Nizar Lakhder (20229915) #nizarlk
+- **`M2`:** Alae aloui (20253423) #alae8804
 - **`M3`:** Membre 3 (matricule) #nom-utilisateur  
 - **`M4`:** Membre 4 (matricule) #nom-utilisateur
 
