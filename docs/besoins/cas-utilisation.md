@@ -10,33 +10,12 @@ TODO: Introduction aux cas d’utilisation du système.
 
 ## Liste des cas d’utilisation
 
-| ID   | Nom                     | Acteurs principaux | Description                                                                     |
-|------|-------------------------|---------------------|--------------------------------------------------------------------------------|
-| CU01 | Personnaliser les choix | Étudiant            | 1-L'étudiant accède à la section filtre de la plateforme                       |
-|      |                         |                     | 2-Le système lui présente un formulaire avec différentes options (préférences  |
-|      |                         |                     | centres d’intérêt, contraintes personnelles)                                   |
-|      |                         |                     | 3-L’étudiant remplit le formulaire avec ses choix                              |
-|      |                         |                     | 4-Le système enregistre ces informations dans la base de données               |
-|      |                         |                     | 5-Par la suite, quand l’étudiant fait une recherche de cours, la plateforme    | 
-|                                |                     | adapte automatiquement l’affichage en fonction du profil enregistré            |
-|------|-------------------------|---------------------|--------------------------------------------------------------------------------|
-| CU02 | Créer un avis étudiant  | Étudiant            | 1-L’étudiant choisit un cours qu’il a suivi et accède à la section Avis        |
-|      |                         |                     | étudiants                                                                      |
-|      |                         |                     | 2-Le système lui propose un formulaire pour écrire son avis (niveau de         |
-|      |                         |                     | difficulte, charge de travail, rythme du cours et commentaire optionnel)       |
-|      |                         |                     |                                                                                |
-|      |                         |                     | 3-L’étudiant rédige son avis et le soumet                                      |
-|      |                         |                     | 4-Le système enregistre l’avis                                                 |
-|      |                         |                     | 5-La plateforme affiche les avis les plus représentatifs quand le nombre       |
-|      |                         |                     | minimal d’avis est atteint (>=5)                                               |
-|------|-------------------------|---------------------|--------------------------------------------------------------------------------|
-| CU03 |  Rechercher un cours    | Étudiant            | 1-L’étudiant accède à la page de recherche de cours                            |
-|      |                         |                     | 2-Le système lui propose différents filtres (code, titre ou mots-clés)         |
-|      |                         |                     | 3-L’étudiant saisit un critère et lance la recherche                           |
-|      |                         |                     | 4-Le système affiche les résultats avec les détails                            |
-|      |                         |                     | 5-la plateforme indique clairement si l’étudiant est éligible ou non           |
-|      |                         |                     | (prérequis, co-requis, cycle, contraintes de programme ou statut), pour chaque |
-|      |                         |                     | cours                                                                          |
+| ID   | Nom                     | Acteurs principaux | Description                                                                                   |
+|------|-------------------------|--------------------|-----------------------------------------------------------------------------------------------|
+| CU01 | Personnaliser les choix | Étudiant           | 1. L'étudiant accède à la section filtre de la plateforme.<br>2. Le système présente un formulaire avec différentes options (préférences, centres d’intérêt, contraintes personnelles).<br>3. L’étudiant remplit le formulaire avec ses choix.<br>4. Le système enregistre ces informations dans la base de données.<br>5. Lors d’une recherche de cours ultérieure, la plateforme adapte automatiquement l’affichage en fonction du profil enregistré. |
+| CU02 | Créer un avis étudiant  | Étudiant           | 1. L’étudiant choisit un cours qu’il a suivi et accède à la section *Avis étudiants*.<br>2. Le système propose un formulaire pour écrire son avis (niveau de difficulté, charge de travail, rythme du cours, commentaire optionnel).<br>3. L’étudiant rédige son avis et le soumet.<br>4. Le système enregistre l’avis.<br>5. La plateforme affiche les avis les plus représentatifs dès que le nombre minimal d’avis (≥5) est atteint. |
+| CU03 | Rechercher un cours     | Étudiant           | 1. L’étudiant accède à la page de recherche de cours.<br>2. Le système propose différents filtres (sigle, titre ou mots-clés).<br>3. L’étudiant saisit un critère et lance la recherche.<br>4. Le système affiche les résultats avec leurs détails.<br>5. La plateforme indique clairement si l’étudiant est éligible ou non (prérequis, co-requis, cycle, contraintes de programme ou statut) pour chaque cours. |
+
 
 ## Détail
 
