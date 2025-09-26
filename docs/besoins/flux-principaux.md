@@ -16,7 +16,6 @@ Diagramme de contexte du projet :
 
 ## Diagrammes d’activités
 
-TODO: Insérer ici des diagrammes d'activités
-
+![Diagramme d'activite](diagrammes/diagramme-d'activite.png)
 ### Description des flux complexes
 
