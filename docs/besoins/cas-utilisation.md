@@ -16,6 +16,11 @@ TODO: Introduction aux cas d’utilisation du système.
 | CU02 | Créer un avis étudiant  | Étudiant           | 1. L’étudiant choisit un cours qu’il a suivi et accède à la section *Avis étudiants*.<br>2. Le système propose un formulaire pour écrire son avis (niveau de difficulté, charge de travail, rythme du cours, commentaire optionnel).<br>3. L’étudiant rédige son avis et le soumet.<br>4. Le système enregistre l’avis.<br>5. La plateforme affiche les avis les plus représentatifs dès que le nombre minimal d’avis (≥5) est atteint. |
 | CU03 | Rechercher un cours     | Étudiant           | 1. L’étudiant accède à la page de recherche de cours.<br>2. Le système propose différents filtres (sigle, titre ou mots-clés).<br>3. L’étudiant saisit un critère et lance la recherche.<br>4. Le système affiche les résultats avec leurs détails.<br>5. La plateforme indique clairement si l’étudiant est éligible ou non (prérequis, co-requis, cycle, contraintes de programme ou statut) pour chaque cours. |
 
+## Diagramme de cas d'utilisation 
+
+Diagramme de cas d'utilisation 
+
+![Diagramme de CU](diagrammes/diagramme-CU.jpg)
 
 ## Détail
 
