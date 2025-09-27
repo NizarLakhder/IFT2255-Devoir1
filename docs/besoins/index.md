@@ -11,10 +11,30 @@ TODO: Préciser comment les besoins ont été collectés (entrevues, questionnai
 ## Description du domaine
 
 ### Fonctionnement
+Actuellement, un étudiant qui souhaite choisir ses cours doit consulter plusieurs sources (Planifium pour les sigles, résultats académiques disponibles sous forme de fichiers, discussions informelles entre étudiants, etc.).
+La plateforme a pour objectif de regrouper ces informations et de les compléter avec des fonctionnalités sur mesure :
+- filtrage des cours en fonction des envies et contraintes personnelles,  
+- visualisation des avis étudiants,  
+- vérification de l'admissibilité aux cours (prérequis et co-requis),  
+- adaptation de l'affichage selon le profil de l'étudiant.
+
+L'étudiant n'a donc plus à jongler entre différents outils : toutes les informations sont disponibles dans une seule interface.
+
 
 ### Acteurs
+- **L’étudiant** est l’acteur principal. C’est lui qui utilise la plateforme pour rechercher ses cours, indiquer ses préférences (ex. matière plus pratique ou théorique), et donner un retour d’expérience après avoir suivi un cours.  
+- **L’administrateur du système** joue un rôle en arrière-plan : il assure que la plateforme fonctionne bien et que les données sont bien connectées aux différentes sources.  
+- **Les sources de données externes** participent aussi indirectement :  
+    - Planifium fournit les informations officielles (sigles, horaires, prérequis).  
+    - La *base des résultats académiques* donne des statistiques utiles (moyenne, taux d’échec, nombre d’inscrits).  
+    - Le *bot Discord* recueille les avis des étudiants et les rend disponibles sous forme de données structurées.  
 
 ### Dépendances
+Le système s’appuie largement sur ces trois sources de données externes :  
+- **Planifium**, nécessaire pour obtenir les cours et leurs conditions d’accès.  
+- **Les résultats académiques**, qui permettent d’évaluer la difficulté et la réussite des cours (moyenne, nombre d’inscrits, taux d’échec).  
+- **Le bot Discord**, qui centralise les avis et retours d’expérience des étudiants.  
+En plus de ça, la plateforme possède sa propre **base de données interne**, qui enregistre le profil de chaque étudiant (ses préférences, ses contraintes, etc.). Ces dépendances sont essentielles : sans elles, la plateforme ne pourrait pas remplir son rôle d’assistant fiable pour le choix de cours.
 
 ## Hypothèses et contraintes
 
@@ -36,7 +56,7 @@ Ces éléments constituent le cadre dans lequel notre solution devra évoluer.
     - en **CSV** pour les résultats académiques (moyenne, nombre d’inscrits, échecs) ;  
     - en **JSON** pour les avis étudiants, via Discord.
 
-    maintCes formats imposent d’une certaine manière ce que peut intégrer et utiliser l’application.  
+  Ces formats définissent ce que l’application peut intégrer et exploiter.
 
 - Conformité légale:  
   Le projet doit se conformer à la **Loi 25** du Québec sur la protection des renseignements personnels. Cela signifie que toutes les données étudiantes doivent être sécurisées et anonymisées avant leur diffusion.  
