@@ -19,6 +19,11 @@ public class CoursService {
         coursDisponibles.add(new Cours("IFT1227 - Architecture des ordinateurs "));
         coursDisponibles.add(new Cours("IFT2035 - Concepts des langages de programmation"));
         coursDisponibles.add(new Cours("IFT1215- Introduction aux Systemes informatiques"));
+        coursDisponibles.add(new Cours("ECN1000 - Economie 1000"));
+        coursDisponibles.add(new Cours("IFT1575 - Modèle de recherche operationelle "));
+        coursDisponibles.add(new Cours("IFT2015 - Structure de données"));
+        coursDisponibles.add(new Cours("IFT1005 - Design et devloppement web "));
+        coursDisponibles.add(new Cours("IFT3060 - Compilation "));
       
     
     }

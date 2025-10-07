@@ -1,51 +1,84 @@
 package prototype;
 
+import prototype.models.*;
+import prototype.services.*;
 import java.util.Scanner;
-import prototype.models.Etudiant;
-import prototype.models.Cours;
-import prototype.services.CoursService;
-
 
 public class Main {
     public static void main(String[] args) {
-     Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        AuthService authService = new AuthService();
+        CoursService coursService = new CoursService();
+        ProfilService profilService = new ProfilService();
 
-       
-        CoursService service = new CoursService();
+        System.out.println("=== Plateforme Choix de Cours UdeM ===");
 
-      
-        System.out.print("Entrez votre nom : ");
-        String nom = sc.nextLine();
-        Etudiant etu = new Etudiant(nom);
+        System.out.print("Avez-vous un compte ? (oui/non): ");
+        String reponse = sc.nextLine();
 
-       
-        System.out.println("\nCours disponibles :");
-        int index = 1;
-        for (Cours c : service.getCoursDisponibles()) {
-            System.out.println(index + ". " + c.getNom());
-            index++;
+        if (reponse.equalsIgnoreCase("non")) {
+            System.out.print("Entrez votre nom: ");
+            String nom = sc.nextLine();
+            System.out.print("Entrez votre email: ");
+            String email = sc.nextLine();
+            System.out.print("Entrez un mot de passe: ");
+            String mdp = sc.nextLine();
+
+            if (authService.creerCompte(nom, email, mdp)) {
+                System.out.println("Compte créé avec succès.");
+            } else {
+                System.out.println("Un compte existe déjà avec cet email.");
+            }
         }
 
-        
-        System.out.print("\nEntrez le numéro du cours à ajouter : ");
-        int choix = sc.nextInt();
-        sc.nextLine(); // consommer le retour à la ligne
+        System.out.print("\nEmail: ");
+        String email = sc.nextLine();
+        System.out.print("Mot de passe: ");
+        String mdp = sc.nextLine();
 
-        if (choix > 0 && choix <= service.getCoursDisponibles().size()) {
-            Cours coursChoisi = service.getCoursDisponibles().get(choix - 1);
-            etu.ajouterCours(coursChoisi);
-            System.out.println("\n✅ Cours ajouté avec succès !");
-        } else {
-            System.out.println("\n⚠️ Choix invalide.");
+        Etudiant etudiant = authService.authentifier(email, mdp);
+
+        if (etudiant == null) {
+            System.out.println("Échec de connexion. Fin du programme.");
+            sc.close();
+            return;
         }
 
-        // Afficher les cours choisis par l'étudiant
-        System.out.println("\nCours choisis par " + etu.getNom() + " :");
-        for (Cours c : etu.getCoursChoisis()) {
-            System.out.println("- " + c.getNom());
+        System.out.println("\nBienvenue, " + etudiant.getNom() + " !");
+
+        int choix = 0;
+        while (choix != 3) {
+            System.out.println("\n=== Menu principal ===");
+            System.out.println("1. Consulter le catalogue de cours");
+            System.out.println("2. Consulter ou modifier votre profil");
+            System.out.println("3. Quitter");
+            System.out.print("Votre choix : ");
+            choix = sc.nextInt();
+            sc.nextLine(); // vider le buffer
+
+            switch (choix) {
+                case 1:
+                    System.out.println("\nCatalogue de cours :");
+                    for (Cours c : coursService.getCoursDisponibles()) {
+                        System.out.println("- " + c.getNom());
+                    }
+                    System.out.println("\nAppuyez sur Entrée pour revenir au menu...");
+                    sc.nextLine();
+                    break;
+
+                case 2:
+                    profilService.gererProfil(etudiant, sc);
+                    break;
+
+                case 3:
+                    System.out.println("Fin du programme.");
+                    break;
+
+                default:
+                    System.out.println("Choix invalide, veuillez réessayer.");
+            }
         }
 
         sc.close();
-        
     }
 }

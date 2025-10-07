@@ -17,3 +17,5 @@ Le rapport est construit avec [MkDocs](https://www.mkdocs.org/) et le thème [Ma
 Pour lancer le site en local :  
 ```bash
 mkdocs serve
+
+Pour compiler le prototype javac prototype/**/*.java puis java prototype.Main

@@ -6,6 +6,7 @@ import java.util.List;
 public class Etudiant {
     private String nom;
     private List<Cours> coursChoisis;
+    private Profil profil;
 
     public Etudiant(String nom) {
         this.nom = nom;
@@ -22,5 +23,13 @@ public class Etudiant {
 
     public List<Cours> getCoursChoisis() {
         return coursChoisis;
+    }
+
+    public Profil getProfil() {
+        return profil;
+    }
+
+    public void setProfil(Profil profil) {
+        this.profil = profil;
     }
 }
