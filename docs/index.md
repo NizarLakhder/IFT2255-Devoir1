@@ -22,8 +22,13 @@ title: Vue d'ensemble
 ## Description du projet
 
 #### Objectif du processus
-Permet à un étudiant de choisir ses cours selon des critères établis par lui-même.  
-Cela implique une démarche **manuelle et fragmentée**, où l’étudiant doit agréger lui-même des informations provenant de sources multiples.
+Le projet consiste à concevoir une plateforme web intelligente, accessible via une API REST, destinée aux étudiants pour les aider à prendre des décisions éclairées dans leur choix de cours.
+Cette plateforme vise à :
+Centraliser les données officielles (via l’API Planifium et les résultats académiques agrégés) et informelles (avis étudiants recueillis sur Discord) ;
+Fournir des tableaux de bord interactifs permettant de visualiser la charge de travail, le taux de réussite et les moyennes des cours ;
+Offrir une recherche intelligente et personnalisée selon le profil de l’étudiant ;
+Permettre la comparaison de plusieurs cours pour estimer la charge combinée et la compatibilité des choix ;
+Assurer la confidentialité des données et le respect des normes légales (Loi 25).
 
 ---
 
@@ -37,14 +42,19 @@ Cela implique une démarche **manuelle et fragmentée**, où l’étudiant doit 
 ---
 #### Étapes du processus
 
-| Étape | Acteur   | Action                                | Entrée                                        | Sortie                                          |   |
-| ----- | -------- | ------------------------------------- | --------------------------------------------- | ----------------------------------------------- | - |
-| 1     | Étudiant | Consulter le catalogue Planifium      | Code ou titre du cours                        | Liste de cours disponibles                      |   |
-| 2     | Étudiant | Vérifier les prérequis et contraintes | Informations du cours et du programme         | Liste de cours éligibles                        |   |
-| 3     | Étudiant | Consulter avis étudiants              | Forums, Discord, bouche-à-oreille             | Avis qualitatifs et estimations de difficulté   |   |
-| 4     | Étudiant | Comparer plusieurs cours              | Informations collectées (officielles et avis) | Classement des cours selon charge et difficulté |   |
-| 5     | Étudiant | Prendre une décision                  | Résultats de la comparaison                   | Choix final du cours                            |   |
-| 6     | Étudiant | S’inscrire                            | Demande à l’administration                    | Inscription confirmée                           |   |
+| Étape | Acteur                    | Action                                             | Entrée                                                                           | Sortie                                                     |   |
+| ----- | ------------------------- | -------------------------------------------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------------- | - |
+| 1     | Étudiant                  | Se connecter au système                            | Identifiants (nom d’utilisateur, mot de passe)                                   | Accès sécurisé à la plateforme                             |   |
+| 2     | Étudiant                  | Consulter le catalogue Planifium                   | Code, titre ou mots-clés de cours                                                | Requête envoyée à l’API Planifium                          |   |
+| 3     | **Système Planifium**     | Fournir les informations officielles sur les cours | Requête de l’étudiant                                                            | Liste des cours (titre, crédits, horaire, prérequis, etc.) |   |
+| 4     | Étudiant                  | Vérifier les prérequis et contraintes              | Informations du cours et du programme                                            | Liste de cours éligibles                                   |   |
+| 5     | **Système Discord / Bot** | Extraire et agréger les avis étudiants             | Messages et réactions des étudiants sur Discord                                  | Base d’avis anonymisée (difficulté, charge, satisfaction)  |   |
+| 6     | Étudiant                  | Consulter les avis étudiants                       | Données agrégées (Discord + base locale)                                         | Synthèse des avis et estimations de difficulté             |   |
+| 7     | Étudiant                  | Comparer plusieurs cours                           | Informations collectées (officielles et avis)                                    | Tableau comparatif : charge, difficulté, taux d’échec      |   |
+| 8     | Étudiant                  | Personnaliser les recommandations                  | Profil personnel (intérêts, niveau, disponibilité, préférences théorie/pratique) | Classement personnalisé des cours recommandés              |   |
+| 9     | Étudiant                  | Sauvegarder ou exporter ses choix                  | Sélection finale de cours                                                        | Liste personnelle enregistrée ou exportée                  |   |
+| 10    | **Administrateur**        | Gérer les données du système                       | Données Planifium, résultats académiques, avis étudiants                         | Mise à jour de la base et supervision du système           |   |
+
 
 #### Contraintes du processus
 1. **Informations dispersées et manque de centralisation** : Les informations nécessaires sont éparpillées sur différentes sources/sites.  

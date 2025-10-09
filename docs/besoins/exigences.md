@@ -10,8 +10,12 @@ TODO: Liste des fonctions que le système doit accomplir.
 
 Exemple :
 
-- [ ] EF1 : L’utilisateur peut créer un compte.
-- [ ] EF2 : Le système envoie un courriel de confirmation.
+- [ ] EF1 : Le système doit permettre à un étudiant de se connecter à la plateforme à l’aide d’identifiants sécurisés
+- [ ] EF2 : Le système doit permettre à l’étudiant de consulter la liste officielle des cours à partir de l’API Planifium.
+- [ ] EF1 : Le système doit afficher les avis étudiants agrégés provenant de la Discord API pour chaque cours.
+- [ ] EF2 : Le système doit permettre à l’étudiant de comparer plusieurs cours selon la charge de travail, la difficulté et le taux        de réussite.
+- [ ] EF1 : Le système doit générer des recommandations de cours personnalisées selon le profil et les préférences de l’étudiant.
+- [ ] EF2 :Le système doit permettre à l’étudiant de soumettre une demande d’inscription, transmise au TGDE pour validation académique.
 
 ## Exigences non fonctionnelles
 
@@ -19,9 +23,12 @@ TODO: Contraintes de performance, sécurité, compatibilité, etc.
 
 Exemple :
 
-- [ ] ENF1 : Le système doit répondre en moins de 2 secondes.
-- [ ] ENF2 : L'application doit être compatible avec Chrome et Firefox.
-
+- [ ] ENF1 : Le système doit répondre en moins de 2 secondes pour les requêtes principales (recherche, affichage, comparaison).
+- [ ] ENF2 : Les échanges de données entre la plateforme et les APIs externes (Planifium, Discord) doivent être sécurisés via HTTPS.
+- [ ] ENF1 : L’application doit être compatible avec les principaux navigateurs (Chrome, Firefox, Safari).
+- [ ] ENF2 : Le système doit respecter les normes de confidentialité et de protection des données personnelles (Loi 25 – Québec).
+- [ ] ENF1 : L’interface doit être intuitive, claire et accessible pour des étudiants de différents profils (locaux, internationaux, débutants).
+- [ ] ENF2 :Le système doit garantir une disponibilité d’au moins 99 % pendant les périodes critiques de choix de cours.
 ## Priorisation
 
 TODO: Identifier les exigences critiques.
