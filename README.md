@@ -2,15 +2,29 @@
 
 Ce dépôt contient le livrable du **Devoir 1 – Analyse des besoins** du cours *IFT2255 (Génie logiciel)* à l’Université de Montréal.  
 Le rapport est construit avec [MkDocs](https://www.mkdocs.org/) et le thème [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
+Le projet consiste à concevoir et modéliser une plateforme d’aide au choix de cours pour les étudiants du DIRO, combinant données officielles (Planifium, résultats académiques) et avis étudiants (Discord)
 
 ##  Contenu du livrable
 
-- Description du domaine (fonctionnement, acteurs, dépendances)
-- Identification des acteurs et parties prenantes
-- Contraintes et règles du domaine
-- Glossaire
-- Diagrammes (activité, contexte, cas d’utilisation)
-- Configuration MkDocs (`mkdocs.yml`)
+Le dépôt contient les éléments suivants :
+
+Description du domaine : fonctionnement actuel, acteurs, dépendances 
+
+Identification des acteurs et parties prenantes
+
+Exigences fonctionnelles et non fonctionnelles
+
+Contraintes et règles du domaine
+
+Glossaire
+
+Analyse des risques et hypothèses
+
+Diagrammes UML :
+Diagrammes de cas d’utilisation
+Diagrammes d’activités (flux principaux)
+Modèle C4 (niveaux 1 et 2) : architecture logicielle et interactions entre composants
+Configuration MkDocs (mkdocs.yml) : génération automatique du rapport HTML
 
 ##  Visualiser le rapport
 
@@ -18,4 +32,8 @@ Pour lancer le site en local :
 ```bash
 mkdocs serve
 
-Pour compiler le prototype javac prototype/**/*.java puis java prototype.Main
+Pour compiler le prototype :
+
+cd src/main/java
+javac prototype/**/*.java 
+java prototype.Main
