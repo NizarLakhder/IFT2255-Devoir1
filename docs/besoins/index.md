@@ -6,7 +6,11 @@ title: Analyse des besoins - Présentation générale
 
 ## Méthodologie pour la cueillette des données
 
-TODO: Préciser comment les besoins ont été collectés (entrevues, questionnaires, brainstorming, etc.).
+Les besoins du projet ont été identifiés principalement à partir de l’énoncé fourni par le client, qui précisait les attentes générales et la liste des fonctionnalités souhaitées.
+L’équipe a ensuite échangé pour clarifier et structurer ces besoins à travers plusieurs séances de réflexion interne (brainstorming).
+Une analyse des outils déjà utilisés par les étudiants (Planifium, forums Discord, plateformes d’avis) a également permis de repérer les limites des solutions actuelles et d’enrichir la compréhension du domaine.
+Enfin, certaines précisions ont été obtenues auprès de l’auxiliaire d’enseignement, afin de valider les interprétations et les priorités du projet.
+Cette démarche progressive a permis de transformer les souhaits initiaux en exigences claires, vérifiables et cohérentes avec les objectifs de la plateforme.
 
 ## Description du domaine
 
@@ -39,7 +43,11 @@ En plus de ça, la plateforme possède sa propre **base de données interne**, q
 ## Hypothèses et contraintes
 
 ### Hypothèses
-TODO: Cette section sera complétée plus tard.
+- H1 : Les API externes (Planifium, Discord, Système académique) sont stables et accessibles via des endpoints publics documentés.
+- H2 : Les étudiants disposent déjà d’un compte institutionnel (UdeM) leur permettant d’accéder à la plateforme.
+- H3 : Les avis étudiants reçus via Discord sont anonymisés et modérés avant intégration.
+- H4 : Les données de Planifium sont à jour à chaque début de trimestre.
+- H5 : Les étudiants utilisent la plateforme à travers un navigateur compatible moderne (Chrome, Firefox, Edge).
 
 ### Contraintes et règles du domaine
 

@@ -6,8 +6,15 @@ title: Conception - Architecture
 
 ## Vue d’ensemble
 
-- Description du type d’architecture retenue (ex. : monolithique, microservices, REST...)
-- Raisons du choix
+L’architecture retenue est de type client–serveur avec une API RESTful.
+Elle repose sur une structure modulaire et évolutive, inspirée du modèle MVC (Modèle – Vue – Contrôleur).
+Cette approche a été choisie pour sa simplicité de maintenance, sa séparation claire des responsabilités et sa compatibilité avec des intégrations externes (API Planifium, Discord, Système académique).
+
+Client (Frontend) : Application web réactive, accessible via un navigateur, permettant aux étudiants de consulter les cours, comparer les options et soumettre des inscriptions.
+
+Serveur (Backend API) : Interface centralisée qui gère la logique métier, les requêtes vers les API externes et la communication avec la base de données.
+
+Base de données interne : Stocke les profils étudiants, préférences, inscriptions et données agrégées (avis et statistiques).
 
 ## Composants principaux
 
