@@ -44,7 +44,7 @@ Le système interroge l’API, récupère la liste officielle des cours, et affi
 - Le système affiche les résultats.
 - Acteurs impliqués : Étudiant, Système principal, API Planifium.
 
-![Diagramme d'activite](diagrammes/diagrammeactivité2.jpg)
+![Diagramme d'activite](diagrammes/diagrammeactivité1.jpg)
 
 ### Flux 3 — Consultation et comparaison (avis + recommandations)
 Ce flux illustre la manière dont l’étudiant obtient des informations qualitatives pour orienter son choix.
