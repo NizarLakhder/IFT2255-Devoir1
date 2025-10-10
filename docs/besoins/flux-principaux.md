@@ -30,7 +30,7 @@ Le système vérifie les informations d’authentification et ouvre une session 
 - Si échec → message d’erreur.
 - Acteurs impliqués : Étudiant, Système principal, Base de données.
 
-![Diagramme d'activite](diagrammes/diagrammeactivité1.jpg)
+![Diagramme d'activite](diagrammes/diagramme-connexion.png)
 
 ### Flux 2 — Consultation du catalogue et informations de cours
 Ce flux permet à l’étudiant de rechercher et consulter les cours disponibles via l’API Planifium.
@@ -44,7 +44,7 @@ Le système interroge l’API, récupère la liste officielle des cours, et affi
 - Le système affiche les résultats.
 - Acteurs impliqués : Étudiant, Système principal, API Planifium.
 
-![Diagramme d'activite](diagrammes/diagrammeactivité2.jpg)
+![Diagramme d'activite](diagrammes/diagrammeactivité1.jpg)
 
 ### Flux 3 — Consultation et comparaison (avis + recommandations)
 Ce flux illustre la manière dont l’étudiant obtient des informations qualitatives pour orienter son choix.
