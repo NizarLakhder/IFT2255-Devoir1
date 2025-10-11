@@ -25,10 +25,16 @@ Exemple :
 
 - [ ] ENF1 : Le système doit répondre en moins de 2 secondes pour les requêtes principales (recherche, affichage, comparaison).
 - [ ] ENF2 : Les échanges de données entre la plateforme et les APIs externes (Planifium, Discord) doivent être sécurisés via HTTPS.
-- [ ] ENF1 : L’application doit être compatible avec les principaux navigateurs (Chrome, Firefox, Safari).
-- [ ] ENF2 : Le système doit respecter les normes de confidentialité et de protection des données personnelles (Loi 25 – Québec).
-- [ ] ENF1 : L’interface doit être intuitive, claire et accessible pour des étudiants de différents profils (locaux, internationaux, débutants).
-- [ ] ENF2 :Le système doit garantir une disponibilité d’au moins 99 % pendant les périodes critiques de choix de cours.
+- [ ] ENF3 : L’application doit être compatible avec les principaux navigateurs (Chrome, Firefox, Safari).
+- [ ] ENF4 : Le système doit respecter les normes de confidentialité et de protection des données personnelles (Loi 25 – Québec).
+- [ ] ENF5 : L’interface doit être intuitive, claire et accessible pour des étudiants de différents profils (locaux, internationaux, débutants).
+- [ ] ENF6 :Le système doit garantir une disponibilité d’au moins 99 % pendant les périodes critiques de choix de cours.
+- [ ] ENF7 : Le système doit conserver les requêtes récentes pour éviter de retaper des recherches identiques.
+- [ ] ENF8 : Le système doit bloquer les avis contenant des mots inappropriés ou offensants avant publication
+- [ ] ENF9 : L’interface doit expliquer les erreurs de connexion pour assurer plus de securite
+- [ ] ENF10 : Les avis étudiants doivent être anonymes, et ajouter un indicateur de fiabilité pour chaque avis.
+
+
 ## Priorisation
 
 TODO: Identifier les exigences critiques.
