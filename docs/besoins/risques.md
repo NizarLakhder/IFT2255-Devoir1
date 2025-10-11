@@ -56,7 +56,7 @@ Les données provenant de Planifium, des fichiers académiques et de Discord peu
 **Impact :** Moyen  
 **Mesures de mitigation :**
 
-- Ajouter un module de validation et d’horodatage des données.  
+
 - Synchroniser régulièrement les sources officielles et communautaires.  
 - Afficher la date de mise à jour des informations pour assurer la transparence.
 
