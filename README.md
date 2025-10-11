@@ -30,10 +30,13 @@ Configuration MkDocs (mkdocs.yml) : génération automatique du rapport HTML
 Répartition des tâches
 Tarek Zerroug (20293977) #tarek8720
 → Modèle C4, code démonstratif
+
 Alae Alaoui (20253423) #alae8804
 → Diagrammes de cas d’utilisation
+
 Nizar Lakhder (20229915) #nizarlk
 → Analyse des risques, rédaction du rapport
+
 Yassine Benbouabid (20257585) #blueishblue
 → Compréhension du domaine , description des flux principaux . 
 
