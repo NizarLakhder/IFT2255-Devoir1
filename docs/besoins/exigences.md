@@ -36,7 +36,18 @@ Exemple :
 
 ## Priorisation
 
-TODO: Identifier les exigences critiques.
+Toutes les exigences n’ont pas le même poids. Certaines sont critiques pour que le système soit utilisable des la première version, tandis que d’autres peuvent être considérées comme secondaires ou évolutives.  
+
+| ID   | Exigence                                      | Priorité  | Justification |
+|------|-----------------------------------------------|-----------|---------------|
+| EF1  | Personnaliser ses choix de cours              | Critique  | Fonctionnalité centrale de la plateforme, cœur de la valeur ajoutée. |
+| EF2  | Recherche de cours avec filtres               | Critique  | Indispensable pour la navigation et l’efficacité du système. |
+| EF3  | Consulter les détails d’un cours              | Critique  | Sans cette information, la plateforme perd son utilité première. |
+| EF6  | Vérification automatique des prérequis        | Critique  | Permet d’éviter des erreurs d’inscription et guide l’étudiant. |
+| EF4  | Rédiger un avis étudiant                      | Important | Utile pour enrichir la plateforme, mais pas essentiel au démarrage. |
+| EF5  | Afficher les avis (min. 5 avant publication)  | Important | Améliore l’expérience, mais dépend de la disponibilité d’assez d’avis. |
+| EF7  | Gestion des connexions par l’administrateur   | Important | Nécessaire pour la maintenance, mais pas directement lié à l’étudiant. |
+| EF8  | Adaptation selon le profil enregistré         | Secondaire| Fonctionnalité avancée qui peut être ajoutée dans une version ultérieure. |
 
 - ENF6 :Le système doit garantir une disponibilité d’au moins 99 % pendant les périodes critiques de choix de cours, le systeme doit rester accessible quand tout le monde l’utilise, c'est le moment le plus important.
 - ENF7 : Le système doit bloquer les avis contenant des mots inappropriés ou offensants avant publication, pour assurer le respect.
@@ -60,11 +71,23 @@ TODO: Identifier les exigences critiques.
 
 ## Infrastructures
 
-> Informations sur l’environnement d’exécution cible, les outils ou plateformes nécessaires.
+## Infrastructures et besoins matériels
 
-- Le système sera hébergé sur un serveur Ubuntu 22.04.
-- Base de données : PostgreSQL version 15.
-- Serveur Web : Nginx + Gunicorn (pour une app Python, par exemple).
-- Framework principal : [À spécifier selon le projet].
+Le système s’appuie sur une infrastructure standard pour assurer la performance et la fiabilité.
 
-<!-- TODO: Compléter selon le stack technique prévu. -->
+- Serveur d’hébergement : Ubuntu 22.04 LTS, avec Nginx + Gunicorn.  
+- Base de données : PostgreSQL 15, pour centraliser les cours, profils étudiants et avis.  
+- Framework applicatif : Python 3.11 (Flask ou Django).  
+- Accès utilisateur : via un navigateur moderne (Chrome, Firefox, Edge) et connexion Internet stable.
+
+### Solution de stockage
+- Données officielles des cours récupérées via l’API Planifium 
+- Résultats académiques intégrés depuis des fichiers CSV
+- Avis étudiants collectés par un bot Discord (format JSON).
+- Préférences utilisateurs stockées dans la base interne.  
+
+### Solution d’intégration
+- API Planifium : pour sigles, horaires et prérequis.  
+- Bot Discord : pour centraliser les avis étudiants.  
+- Import CSV : pour les données académiques.  
+- API REST interne : pour permettre l’accès aux données par des applications tierces.
