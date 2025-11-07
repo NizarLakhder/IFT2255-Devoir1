@@ -51,3 +51,14 @@ Pour compiler le prototype :
 cd src/main/java
 javac prototype/**/*.java 
 java prototype.Main
+
+
+cd /Users/zerroug/Desktop/genie-logiciel-lafontant/IFT2255-Devoir1
+mvn clean compile
+
+et simplement lancer directement ton programme avec la commande suivante :
+▶ Pour lancer l'application console
+mvn exec:java -Dexec.mainClass="prototype.Main"
+
+▶ Pour lancer le serveur 
+mvn exec:java -Dexec.mainClass="prototype.Server"

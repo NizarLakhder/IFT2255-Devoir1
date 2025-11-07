@@ -83,10 +83,15 @@ async def on_message(message : discord.Message):
             "auteur": str(message.author)
         }
         async with aiohttp.ClientSession() as session:
-            async with session.post("http://localhost:8080/avis", json=payload) as response:
-                print("Status:", response.status)
-                print("Response:", await response.text())
-                await message.channel.send(f"{await response.text()}")
+            async with session.post("http://localhost:7070/api/avis", json=payload) as response:
+
+            
+                if response.status == 201:
+                    await message.channel.send(" Avis reçu et enregistré avec succès !")
+                else:
+                    txt = await response.text()
+                    await message.channel.send(f" Erreur lors de l’envoi ({response.status}): {txt}")
+
 
  
     await bot.process_commands(message)
