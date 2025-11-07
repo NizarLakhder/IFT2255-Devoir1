@@ -26,7 +26,7 @@ public class Server {
     // === config ===
     private static final ObjectMapper mapper = new ObjectMapper()
             .enable(SerializationFeature.INDENT_OUTPUT); 
-    private static final File file = new File("avis.json");
+    private static final File file = new File("data/avis.json");
 
     public static void main(String[] args) {
 
