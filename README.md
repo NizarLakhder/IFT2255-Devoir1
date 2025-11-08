@@ -61,4 +61,4 @@ et simplement lancer directement ton programme avec la commande suivante :
 mvn exec:java -Dexec.mainClass="prototype.Main"
 
 ▶ Pour lancer le serveur 
-mvn exec:java -Dexec.mainClass="prototype.Server"
+

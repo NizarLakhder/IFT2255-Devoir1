@@ -70,7 +70,6 @@ public class Server {
 
           
             avisList.add(avis);
-
             
             mapper.writerWithDefaultPrettyPrinter().writeValue(file, avisList);
 
