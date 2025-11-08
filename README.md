@@ -39,7 +39,7 @@ Le **Devoir 2** consiste à :
 
 - **Java 17+**
 - **Maven 3.8+**
-- **Connexion Internet** (nécessaire pour accéder à l’API Planifium)
+- **Connexion Internet** (nécessaire pOour accéder à l’API Planifium)
 - (Facultatif) MkDocs pour visualiser le rapport
 
 ---
