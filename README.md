@@ -53,4 +53,4 @@ mvn clean compile
 ## Exécution du prototype
 
 Pour lancer le serveur javalin  : mvn exec:java -Dexec.mainClass="com.diro.ift2255.Main"
-Pour lancer l'application console : mvn exec:java -Dexec.mainClass="com.diro.ift2255.console.ConsoleApp"
+Pour lancer l'application console : mvn exec:java -Dexec.mainClass="com.diro.ift2255.console.MainConsole"
