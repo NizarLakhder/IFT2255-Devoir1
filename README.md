@@ -1,64 +1,56 @@
-# Devoir 1 – IFT2255 (Génie logiciel)
+# Devoir 2 – IFT2255 (Génie logiciel)
 
-Ce dépôt contient le livrable du **Devoir 1 – Analyse des besoins** du cours *IFT2255 (Génie logiciel)* à l’Université de Montréal.  
-Le rapport est construit avec [MkDocs](https://www.mkdocs.org/) et le thème [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
-Le projet consiste à concevoir et modéliser une plateforme d’aide au choix de cours pour les étudiants du DIRO, combinant données officielles (Planifium, résultats académiques) et avis étudiants (Discord)
+Ce dépôt contient le livrable complet du **Devoir 2 – Conception et prototype** du cours *IFT2255 (Génie logiciel)* à l’Université de Montréal.
 
-##  Contenu du livrable
+L’objectif du projet est de **concevoir et implanter un prototype fonctionnel** d’une plateforme d’aide au choix de cours pour les étudiants du DIRO (Département d’informatique et de recherche opérationnelle).  
+Cette plateforme combine :
 
-Le dépôt contient les éléments suivants :
+- **Les données officielles de Planifium** (cours, prérequis, horaires, crédits, etc.)  
+- **Des avis étudiants** recueillis via un bot Discord  
+- Une **interface console** pour tester les cas d’utilisation  
+- Une **API REST (Javalin)** permettant l’accès programmatique aux données  
 
-Description du domaine : fonctionnement actuel, acteurs, dépendances 
+---
 
-Identification des acteurs et parties prenantes
+---
 
-Exigences fonctionnelles et non fonctionnelles
+## 🎯 Objectifs du Devoir 2
 
-Contraintes et règles du domaine
+Le **Devoir 2** consiste à :
 
-Glossaire
+1. **Concevoir la solution logicielle complète**
+   - Diagrammes UML détaillés (séquence, classes, composants)
+   - Architecture logicielle (modèle C4 – niveaux 3 et 4)
+   - Modélisation des interactions entre la console, l’API REST et les services
 
-Analyse des risques et hypothèses
+2. **Implanter un prototype fonctionnel**
+   - Serveur **Javalin REST** permettant d’exposer les données de cours
+   - Application **console** pour interagir avec l’utilisateur
+   - Intégration dynamique avec **l’API Planifium**
 
-Diagrammes UML :
-Diagrammes de cas d’utilisation
-Diagrammes d’activités (flux principaux)
-Modèle C4 (niveaux 1 et 2) : architecture logicielle et interactions entre composants
-Configuration MkDocs (mkdocs.yml) : génération automatique du rapport HTML
+3. **Démontrer les cas d’utilisation principaux :**
+   - Recherche de cours  
+   - Consultation détaillée  
+   - Comparaison de plusieurs cours  
 
+---
 
-Répartition des tâches
-Tarek Zerroug (20293977) #tarek8720
-→ Modèle C4, code démonstratif
+## ⚙️ Prérequis
 
-Alae Alaoui (20253423) #alae8804
-→ Diagrammes de cas d’utilisation
+- **Java 17+**
+- **Maven 3.8+**
+- **Connexion Internet** (nécessaire pour accéder à l’API Planifium)
+- (Facultatif) MkDocs pour visualiser le rapport
 
-Nizar Lakhder (20229915) #nizarlk
-→ Analyse des risques, rédaction du rapport
+---
 
-Yassine Benbouabid (20257585) #blueishblue
-→ Compréhension du domaine , description des flux principaux . 
+##  Compilation du projet
 
-##  Visualiser le rapport
+Avant toute exécution, compile le projet à la racine du module `ift2255-template-javalin/rest-api` :
 
-Pour lancer le site en local :  
-```bash
-mkdocs serve
-
-Pour compiler le prototype :
-
-cd src/main/java
-javac prototype/**/*.java 
-java prototype.Main
-
-
-cd /Users/zerroug/Desktop/genie-logiciel-lafontant/IFT2255-Devoir1
 mvn clean compile
 
-et simplement lancer directement ton programme avec la commande suivante :
-▶ Pour lancer l'application console
-mvn exec:java -Dexec.mainClass="prototype.Main"
+## Exécution du prototype
 
-▶ Pour lancer le serveur 
-
+Pour lancer le serveur javalin  : mvn exec:java -Dexec.mainClass="com.diro.ift2255.Main"
+Pour lancer l'application console : mvn exec:java -Dexec.mainClass="com.diro.ift2255.console.ConsoleApp"
