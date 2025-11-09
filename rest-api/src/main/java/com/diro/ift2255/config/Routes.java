@@ -96,9 +96,9 @@ public class Routes {
         // --- Routes REST ---
         CourseService courseService = new CourseService(new HttpClientApi());
         CourseController courseController = new CourseController(courseService);
-        app.get("/courses", courseController::getAllCourses);
-        app.get("/courses/{id}", courseController::getCourseById);
         app.get("/courses/compare", courseController::compareCourses);
+app.get("/courses", courseController::getAllCourses);
+app.get("/courses/{id}", courseController::getCourseById);
 
         UserService userService = new UserService();
         UserController userController = new UserController(userService);

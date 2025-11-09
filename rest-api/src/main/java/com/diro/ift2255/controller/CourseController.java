@@ -9,31 +9,51 @@ public class CourseController {
 
     private final CourseService courseService;
 
-    // ✅ constructeur ajouté pour corriger l'erreur
     public CourseController(CourseService courseService) {
         this.courseService = courseService;
     }
 
+    // /courses?sigle=IFT
     public void getAllCourses(Context ctx) {
-        Map<String, List<String>> queryParams = ctx.queryParamMap();
-        String sigle = queryParams.containsKey("sigle") ? queryParams.get("sigle").get(0) : "";
+        String sigle = ctx.queryParam("sigle");
+        if (sigle == null) sigle = "";
         List<Course> courses = courseService.getAllCourses(sigle);
-        ctx.json(courses);
-    }
 
-    public void getCourseById(Context ctx) {
-        String id = ctx.pathParam("id");
-        Course course = courseService.getCourseById(id);
-        if (course != null) {
-            ctx.json(course);
+        if (courses.isEmpty()) {
+            ctx.status(404).json(Map.of("message", "Aucun cours trouvé pour le sigle " + sigle));
         } else {
-            ctx.status(404).result("Cours non trouvé");
+            ctx.json(courses);
         }
     }
 
+    // /courses/IFT2255
+    public void getCourseById(Context ctx) {
+        String id = ctx.pathParam("id");
+        Course course = courseService.getCourseById(id);
+
+        if (course != null) {
+            ctx.json(course);
+        } else {
+            ctx.status(404).json(Map.of("message", "Cours " + id + " non trouvé"));
+        }
+    }
+
+    // /courses/compare?ids=IFT2255,MAT1400
     public void compareCourses(Context ctx) {
-        String[] sigles = ctx.queryParam("ids").split(",");
+        String idsParam = ctx.queryParam("ids");
+
+        if (idsParam == null || idsParam.isBlank()) {
+            ctx.status(400).json(Map.of("error", "Paramètre 'ids' manquant (ex: ?ids=IFT2255,MAT1400)"));
+            return;
+        }
+
+        String[] sigles = idsParam.split(",");
         List<Course> courses = courseService.getCoursParCodes(sigles);
-        ctx.json(courses);
+
+        if (courses.isEmpty()) {
+            ctx.status(404).json(Map.of("message", "Aucun cours trouvé pour la comparaison"));
+        } else {
+            ctx.json(courses);
+        }
     }
 }

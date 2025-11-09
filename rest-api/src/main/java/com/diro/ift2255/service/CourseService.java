@@ -18,16 +18,16 @@ public class CourseService {
         this.httpClient = httpClient;
     }
 
-    // Recherche un cours par sigle (ex: IFT2255)
+    // Recherche un cours par sigle
     public List<Course> rechercherCours(String sigle) {
         try {
-            String url = BASE_URL + "?sigle=" + sigle;
+            String url = BASE_URL + "?sigle=" + sigle.toUpperCase();
             HttpClientApiResponse response = httpClient.get(URI.create(url));
 
             if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
                 return mapper.readValue(response.getBody(), new TypeReference<List<Course>>() {});
             } else {
-                System.err.println("Erreur API: " + response.getStatusMessage());
+                System.err.println("Erreur API (rechercheCours): " + response.getStatusMessage());
                 return Collections.emptyList();
             }
         } catch (Exception e) {
@@ -39,13 +39,13 @@ public class CourseService {
     // Détails d’un cours
     public Course getCoursParCode(String sigle) {
         try {
-            String url = BASE_URL + "/" + sigle;
+            String url = BASE_URL + "/" + sigle.toUpperCase();
             HttpClientApiResponse response = httpClient.get(URI.create(url));
 
             if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
                 return mapper.readValue(response.getBody(), Course.class);
             } else {
-                System.err.println("Erreur API: " + response.getStatusMessage());
+                System.err.println("Erreur API (getCoursParCode): " + response.getStatusMessage());
                 return null;
             }
         } catch (Exception e) {
@@ -54,7 +54,7 @@ public class CourseService {
         }
     }
 
-    // Compare plusieurs cours (utilise les méthodes précédentes)
+    // Compare plusieurs cours
     public List<Course> getCoursParCodes(String[] sigles) {
         List<Course> list = new ArrayList<>();
         for (String sigle : sigles) {
@@ -64,12 +64,10 @@ public class CourseService {
         return list;
     }
 
-    // Liste de tous les cours (ou filtrée par sigle)
     public List<Course> getAllCourses(String sigle) {
         return rechercherCours(sigle);
     }
 
-    // Alias pour compatibilité avec la route /courses/{id}
     public Course getCourseById(String id) {
         return getCoursParCode(id);
     }
