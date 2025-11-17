@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.util.*;
 
-public class AvisService {
+public class AvisService implements IService<Avis>{
     private static final String FILE_PATH = "dataDiscord/avis.json";
     private final ObjectMapper mapper = new ObjectMapper();
 
@@ -34,4 +34,30 @@ public class AvisService {
             throw new RuntimeException(e);
         }
     }
+   @Override
+public List<Avis> getAll() {
+    return lireAvis();
+}
+
+@Override
+public Avis getById(String id) {
+    
+    return null;
+}
+
+@Override
+public void create(Avis avis) {
+    ajouterAvis(avis);
+}
+
+@Override
+public void update(String id, Avis avis) {
+    throw new UnsupportedOperationException("Avis cannot be updated.");
+}
+
+@Override
+public void delete(String id) {
+    throw new UnsupportedOperationException("Avis cannot be deleted individually.");
+}
+
 }

@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.URI;
 import java.util.*;
 
-public class CourseService {
+public class CourseService implements IService<Course> {
     private final HttpClientApi httpClient;
     private final ObjectMapper mapper = new ObjectMapper();
     private static final String BASE_URL = "https://planifium-api.onrender.com/api/v1/courses";
@@ -71,4 +71,29 @@ public class CourseService {
     public Course getCourseById(String id) {
         return getCoursParCode(id);
     }
+   @Override
+public List<Course> getAll() {
+    return getAllCourses("");
+}
+
+@Override
+public Course getById(String id) {
+    return getCourseById(id);
+}
+
+@Override
+public void create(Course entity) {
+    throw new UnsupportedOperationException("Not supported.");
+}
+
+@Override
+public void update(String id, Course entity) {
+    throw new UnsupportedOperationException("Not supported.");
+}
+
+@Override
+public void delete(String id) {
+    throw new UnsupportedOperationException("Not supported.");
+}
+
 }

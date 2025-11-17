@@ -3,7 +3,7 @@ package com.diro.ift2255.service;
 import com.diro.ift2255.model.User;
 import java.util.*;
 
-public class UserService {
+public class UserService implements IService<User> {
     private final Map<Integer, User> users = new HashMap<>();
     private int nextId = 1;
 
@@ -45,4 +45,29 @@ public class UserService {
     public void deleteUser(int id) {
         users.remove(id);
     }
+    @Override
+public List<User> getAll() {
+    return getAllUsers();
+}
+
+@Override
+public User getById(String id) {
+    return getUserById(Integer.parseInt(id)).orElse(null);
+}
+
+@Override
+public void create(User entity) {
+    createUser(entity);
+}
+
+@Override
+public void update(String id, User entity) {
+    updateUser(Integer.parseInt(id), entity);
+}
+
+@Override
+public void delete(String id) {
+    deleteUser(Integer.parseInt(id));
+}
+
 }
