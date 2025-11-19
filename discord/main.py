@@ -37,7 +37,7 @@ async def send_welcome_message(guild):
         if channel.permissions_for(guild.me).send_messages:
             try:
                 await channel.send(
-                    f" Bonjour à tous sur **{guild.name}** ! Le bot est maintenant en ligne 🚀\n"
+                    f" Bonjour à tous sur **{guild.name}** ! Le bot est maintenant en ligne \n"
                     "Voici le format attendu pour soumettre un avis :\n"
                     "```\n"
                     "!avis Cours: IFT2255 | Difficulté: 7 | Charge: 6 | Commentaire: Projet intéressant mais long\n"
