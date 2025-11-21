@@ -85,7 +85,66 @@ Il illustre les **conteneurs principaux**, leurs **rôles**, et les **mécanisme
 
 ---
 
-## 🔁 Communication entre composants
+## Niveau 3 — Diagramme de composants
+
+Le diagramme de niveau 3 présente les composants internes de l’application ainsi que leurs rôles. Il montre comment les contrôleurs REST, les services métiers et les systèmes externes communiquent entre eux afin de supporter les fonctionnalités offertes à l’étudiant.
+
+### Composants principaux
+
+* Interface Web / CLI  
+  - Permet aux étudiants d’effectuer la recherche et la comparaison de cours ainsi que la consultation ou la soumission d’avis.  
+  - Envoie des appels API au backend (JSON / HTTP(S)).
+
+* Application mobile  
+  - Offre une version simplifiée des fonctionnalités principales.  
+  - Effectue des appels API vers le backend (JSON / HTTPS).
+
+* CourseController  
+  - Gère la recherche et la comparaison des cours.  
+  - Reçoit les requêtes REST et transmet les opérations au CourseService.
+
+* CourseService  
+  - Applique la logique métier liée aux cours.  
+  - Communique avec l’API Planifium pour récupérer les données officielles.  
+  - Transforme les données brutes avant de les retourner au contrôleur.
+
+* UserController  
+  - Gère les requêtes REST liées aux utilisateurs (profil, préférences).  
+  - Transmet les opérations au UserService.
+
+* UserService  
+  - Applique la logique métier liée aux utilisateurs.  
+  - Utilise la base de données pour récupérer et stocker les informations internes.
+
+* AvisController  
+  - Reçoit les requêtes REST d’ajout ou de consultation des avis.  
+  - Valide les données reçues puis appelle AvisService.
+
+* AvisService  
+  - Valide et enregistre les avis.  
+  - Envoie les avis confirmés au Bot Discord.  
+  - Peut agréger des avis externes selon les besoins.
+
+### Systèmes externes
+
+* API Planifium  
+  - Fournit les données officielles des cours (sigles, crédits, descriptions).  
+  - Reçoit des appels HTTP du backend et retourne des réponses JSON.
+
+* Base de données  
+  - Stocke les comptes utilisateurs, avis, historiques et données agrégées.
+
+* Bot Discord  
+  - Reçoit les avis validés via un appel HTTP.  
+  - Confirme l’enregistrement pour affichage communautaire.
+
+
+### Diagramme
+
+![Diagramme C4 Niveau 2](../besoins/diagrammes/C4-niveau3.PNG)
+
+
+##  Communication entre composants
 
 | Source | Destination | Description du flux | Technologie |
 |---------|--------------|---------------------|--------------|

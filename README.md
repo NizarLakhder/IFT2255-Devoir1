@@ -14,7 +14,7 @@ Cette plateforme combine :
 
 ---
 
-## 🎯 Objectifs du Devoir 2
+##  Objectifs du Devoir 2
 
 Le **Devoir 2** consiste à :
 

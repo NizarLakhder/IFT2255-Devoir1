@@ -12,90 +12,114 @@ Cette section présente les principaux risques identifiés ainsi que les mesures
 
 
 ### Risque 1 – Dépendance aux sources externes (Planifium, Discord, résultats académiques)
-Le système s’appuie fortement sur des services externes comme **Planifium**, **Discord** et les **bases de résultats académiques**.  
-Une modification de ces APIs ou une panne pourrait rendre certaines fonctionnalités inaccessibles.  
+
+Le système dépend fortement de Planifium, des fichiers de résultats académiques et du bot Discord. Une panne, un changement d’API ou un format de fichier modifié peut bloquer des fonctionnalités essentielles.
 
 **Probabilité :** Élevée  
 **Impact :** Élevé  
+
 **Mesures de mitigation :**
+- Mettre en place un cache local mis à jour régulièrement.  
+- Centraliser les appels aux APIs dans des services dédiés pour pouvoir adapter le code facilement.  
+- Prévoir un mode dégradé utilisant les données du cache.  
+- Afficher des messages d’erreur clairs et informatifs à l’utilisateur.  
 
-- Mettre en place un mécanisme de mise en cache local pour éviter les interruptions.  
-- Adapter rapidement les requêtes en cas de changement de structure des APIs.  
-- Prévoir des messages d’erreur clairs pour informer l’utilisateur.  
-- Maintenir une documentation technique à jour pour les connexions externes.
 
+---
 
-### Risque 2 – Problèmes de performance et de charge du serveur
-Lors des périodes critiques (comme le choix de cours), un grand nombre d’étudiants peuvent utiliser la plateforme simultanément, ce qui risque de la ralentir ou de la rendre indisponible.  
+### Risque 2 – Problèmes de performance et charge du serveur
+
+Lors du choix de cours, de nombreux étudiants utilisent la plateforme simultanément. Le serveur peut ralentir ou devenir indisponible.
 
 **Probabilité :** Moyenne  
 **Impact :** Élevé  
+
 **Mesures de mitigation :**
+- Mettre en place de la mise en cache pour réduire les appels répétitifs à Planifium.  
+- Réaliser des tests de charge (ex: JMeter).  
+- Surveiller les métriques du système (CPU, RAM, latence).  
+- Prévoir un hébergement scalable en cas d’augmentation de charge.  
 
-- Prévoir un hébergement évolutif (scalable) avant les périodes de pointe.  
-- Effectuer des tests de charge et d’optimisation réguliers.  
-- Mettre en place un système de surveillance du serveur pour détecter les problèmes avant qu’ils n’affectent les utilisateurs.
 
+---
 
-### Risque 3 – Fiabilité et pertinence des avis étudiants
-Les avis laissés par les étudiants peuvent être incomplets, biaisés ou obsolètes, ce qui compromettrait la fiabilité des recommandations.  
+### Risque 3 – Fiabilité, âge et pertinence des avis étudiants
+
+Les avis Discord peuvent être obsolètes (cours modifié, nouveau professeur), incomplets ou biaisés, ce qui affecte la pertinence des synthèses affichées.
 
 **Probabilité :** Moyenne  
 **Impact :** Moyen  
+
 **Mesures de mitigation :**
+- Afficher un indicateur d’ancienneté des avis.  
+- Ne garder que les avis des dernières années (ex: 2 ou 3 ans).  
+- Afficher les avis seulement à partir d’un seuil minimal (n ≥ 5).  
+- Permettre le filtrage par session/année.  
+- Agréger les avis pour obtenir une tendance représentative.  
 
-- Afficher les avis seulement lorsqu’un minimum de 5 contributions est atteint.  
-- Intégrer un système de signalement pour supprimer les avis inappropriés.  
-- Agréger les avis pour en extraire une tendance plus représentative.
 
+---
 
-### Risque 4 – Incohérence entre les données officielles et les avis étudiants
-Les données provenant de Planifium, des fichiers académiques et de Discord peuvent parfois être désynchronisées ou contradictoires.  
+### Risque 4 – Incohérence entre données officielles et avis étudiants
+
+Planifium, les résultats académiques et les avis Discord peuvent ne pas être synchronisés (sigles différents, cours modifiés, données anciennes).
 
 **Probabilité :** Moyenne  
 **Impact :** Moyen  
+
 **Mesures de mitigation :**
+- Normaliser automatiquement les sigles des cours lors du traitement.  
+- Afficher la date de mise à jour de chaque source.  
+- Détecter les incohérences et afficher un avertissement.  
+- Synchroniser régulièrement les sources (quotidien ou hebdomadaire).  
 
 
-- Synchroniser régulièrement les sources officielles et communautaires.  
-- Afficher la date de mise à jour des informations pour assurer la transparence.
+---
 
+### Risque 5 – Sécurité et confidentialité des données (Loi 25)
 
-### Risque 5 – Sécurité et confidentialité des données (conformité à la Loi 25)
-Le système manipule des données sensibles (profils étudiants, avis, connexions). Une mauvaise gestion pourrait compromettre la vie privée des utilisateurs.  
+Le système manipule des données sensibles comme les préférences étudiantes ou les avis soumis via Discord. Une mauvaise gestion peut entraîner des violations légales.
 
 **Probabilité :** Faible à moyenne  
 **Impact :** Élevé  
+
 **Mesures de mitigation :**
+- Forcer l’utilisation de HTTPS.  
+- Hacher les mots de passe et chiffrer les données sensibles.  
+- Anonymiser immédiatement les avis Discord.  
+- Respecter la Loi 25 et les directives institutionnelles.  
 
-- Utiliser le chiffrement HTTPS et le hachage des mots de passe.  
-- Anonymiser les données avant leur affichage public.  
-- Respecter les politiques de sécurité de l’Université de Montréal et la Loi 25 sur la protection des renseignements personnels.
 
+---
 
-### Risque 6 – Absence prolongée d’un membre clé de l’équipe
-La non-disponibilité d’un membre essentiel pourrait ralentir la progression du projet ou nuire à la cohérence du travail.  
+### Risque 6 – Absence prolongée d’un membre clé de l'équipe
+
+L’indisponibilité d’un membre essentiel risque de ralentir le projet ou nuire à la cohérence.
+
 **Probabilité :** Moyenne  
 **Impact :** Élevé  
+
 **Mesures de mitigation :**
+- Documenter toutes les fonctionnalités développées.  
+- Diviser clairement les responsabilités.  
+- Utiliser GitHub Issues + branches pour suivre et partager les tâches.  
+- Encourager le pair programming pour réduire la dépendance individuelle.  
 
-- Répartir clairement les responsabilités entre les membres.  
-- Documenter régulièrement le travail effectué.  
-- Favoriser le pair programming pour éviter toute dépendance à une seule personne.
 
+---
 
 ### Risque 7 – Adoption limitée de la plateforme par les étudiants
-Même si la plateforme est fonctionnelle, son adoption peut être faible si elle ne répond pas bien aux besoins réels des étudiants ou si elle manque de visibilité.  
+
+Même si la plateforme est fonctionnelle, les étudiants pourraient ne pas l’utiliser si elle ne présente pas clairement ses avantages ou si elle semble complexe.
 
 **Probabilité :** Moyenne  
 **Impact :** Moyen  
+
 **Mesures de mitigation :**
-
-- Promouvoir le projet auprès des associations étudiantes et sur les réseaux sociaux.  
-- Soigner l’ergonomie et la simplicité de l’interface.  
-- Mettre en place des mécanismes de rétroaction pour recueillir et intégrer les suggestions des utilisateurs.
-
----
+- Concevoir une interface simple, intuitive et adaptée aux téléphones.  
+- Promouvoir l’outil auprès des associations étudiantes et dans les serveurs Discord du DIRO.  
+- Ajouter un système de rétroaction utilisateur intégré.  
+- Mettre en avant les bénéfices : comparaison, avis, charge estimée.  
 
 ## Modification du processus opérationnel
 

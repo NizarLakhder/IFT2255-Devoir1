@@ -17,7 +17,8 @@ Cette démarche progressive a permis de transformer les souhaits initiaux en exi
 ### Fonctionnement
 Actuellement, un étudiant qui souhaite choisir ses cours doit consulter plusieurs sources (Planifium pour les sigles, résultats académiques disponibles sous forme de fichiers, discussions informelles entre étudiants, etc.).
 La plateforme a pour objectif de regrouper ces informations et de les compléter avec des fonctionnalités sur mesure :
-- filtrage des cours en fonction des envies et contraintes personnelles,  
+
+- filtrage des cours en fonction des envies et contraintes personnelles , par exemple les conflits d'horaire  ,  les charges de travail trop élevées , des préférences d'apprentissage , les centres dinterets
 - visualisation des avis étudiants,  
 - vérification de l'admissibilité aux cours (prérequis et co-requis),  
 - adaptation de l'affichage selon le profil de l'étudiant.
