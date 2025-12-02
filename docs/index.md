@@ -10,7 +10,11 @@ title: Vue d'ensemble
     }
 </style>
 
-# Nom du projet
+# plateforme de gesion de cours - planifium 
+
+## Lien vers le repo github
+ 
+[https://github.com/NizarLakhder/IFT2255-Devoir1](https://github.com/NizarLakhder/IFT2255-Devoir1)
 
 ## Équipe
 

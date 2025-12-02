@@ -20,7 +20,7 @@ Le **Devoir 2** consiste à :
 
 1. **Concevoir la solution logicielle complète**
    - Diagrammes UML détaillés (séquence, classes, composants)
-   - Architecture logicielle (modèle C4 – niveaux 3 et 4)
+   - Architecture logicielle (modèle C4 – niveaux 3 )
    - Modélisation des interactions entre la console, l’API REST et les services
 
 2. **Implanter un prototype fonctionnel**
@@ -35,7 +35,7 @@ Le **Devoir 2** consiste à :
 
 ---
 
-## ⚙️ Prérequis
+##  Prérequis
 
 - **Java 17+**
 - **Maven 3.8+**
@@ -44,13 +44,14 @@ Le **Devoir 2** consiste à :
 
 ---
 
-##  Compilation du projet
+##
+IFT2255-Devoir1/rest-api puis mvn test pour réaliser les tests unitaire , l'oracle de tests se situent dans la section evaluation.md
 
-Avant toute exécution, compile le projet à la racine du module `ift2255-template-javalin/rest-api` :
 
-mvn clean compile
+## Exécution du projet
 
-## Exécution du prototype
 
-Pour lancer le serveur javalin  : mvn exec:java -Dexec.mainClass="com.diro.ift2255.Main"
-Pour lancer l'application console : mvn exec:java -Dexec.mainClass="com.diro.ift2255.console.MainConsole"
+Aller dans la dossier IFT2255-Devoir1/rest-api ou se situe le fichier pom.xml puis éxecuter mvn clean compile , ensuite :
+
+Pour lancer le serveur javalin  : mvn exec:java -D exec.mainClass="com.diro.ift2255.Main"
+Pour lancer l'application console : mvn exec:java -D exec.mainClass="com.diro.ift2255.console.MainConsole"
