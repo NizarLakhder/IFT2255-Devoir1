@@ -1,9 +1,10 @@
-package com.diro.ift2255.service;
+package com.diro.ift2255;
 
 import com.diro.ift2255.model.Course;
 import com.diro.ift2255.util.HttpClientApi;
 import com.diro.ift2255.util.HttpClientApiResponse;
 import org.junit.jupiter.api.Test;
+import com.diro.ift2255.service.CourseService;
 
 import java.net.URI;
 import java.util.ArrayDeque;
