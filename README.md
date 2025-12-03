@@ -47,6 +47,13 @@ Le **Devoir 2** consiste à :
 ##
 IFT2255-Devoir1/rest-api puis mvn test pour réaliser les tests unitaire , l'oracle de tests se situent dans la section evaluation.md
 
+## Répartition des taches 
+
+tarek zerroug : implémentation , bot discord  , révision Cu , 
+Nizar Lakhder : diagramme C3 .
+Alae aloui : révision , rapport , diagramme de séquence
+Yassine Benbouabid : diagramme d'activité
+
 
 ## Exécution du projet
 
