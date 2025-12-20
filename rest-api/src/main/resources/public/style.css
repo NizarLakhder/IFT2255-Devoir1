@@ -1,0 +1,67 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #32609d;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.search {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  background: white;
+}
+
+.search input, .search select {
+  padding: 10px;
+  font-size: 16px;
+  flex: 1;
+}
+
+#courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+.course {
+  background: white;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.course h3 {
+  margin-top: 0;
+}
+
+.panel {
+  background: white;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+button {
+  padding: 8px 12px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.conflict {
+  color: red;
+  font-weight: bold;
+}

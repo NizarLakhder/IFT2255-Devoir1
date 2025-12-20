@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Catalogue de recherche de cours</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Catalogue de recherche de cours</h1>
+</header>
+
+<section class="search">
+  <input type="text" id="searchInput" placeholder="Rechercher (ex: IFT, génie logiciel)">
+  <select id="termFilter">
+    <option value="">Tous les trimestres</option>
+    <option value="H25">H25</option>
+    <option value="A24">A24</option>
+    <option value="E24">E24</option>
+  </select>
+</section>
+
+<section id="courses"></section>
+
+<section class="panel">
+  <h2>Comparer deux cours</h2>
+  <select id="compare1"></select>
+  <select id="compare2"></select>
+  <button onclick="compareCourses()">Comparer</button>
+  <div id="comparison"></div>
+</section>
+
+<section class="panel">
+  <h2>Ensemble de cours (max 6)</h2>
+  <select id="setSelect"></select>
+  <button onclick="addToSet()">Ajouter</button>
+  <ul id="courseSet"></ul>
+  <button onclick="checkConflicts()">Vérifier conflits</button>
+  <div id="conflicts"></div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -9,8 +9,17 @@ public class Main {
         // Crée une instance de Javalin avec une configuration personnalisée
         // Ici, on définit le type de contenu par défaut des réponses HTTP en JSON
         Javalin app = Javalin.create(config -> {
+
             config.http.defaultContentType = "application/json";
+
+            config.staticFiles.add(staticFiles -> {
+                staticFiles.hostedPath = "/";      // servi à la racine
+                staticFiles.directory = "/public"; // dossier dans resources
+                staticFiles.precompress = false;
+            });
+
         });
+            
 
         // Enregistre toutes les routes de l'application
         Routes.register(app);
