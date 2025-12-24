@@ -1,0 +1,55 @@
+[ {
+  "cours" : "MAT1400",
+  "difficulte" : 10,
+  "charge" : 6,
+  "commentaire" : "cours extremement difficile",
+  "auteur" : "tarek_zer"
+}, {
+  "cours" : "IFT2255",
+  "difficulte" : 4,
+  "charge" : 5,
+  "commentaire" : "Projet exigeant mais formateur",
+  "auteur" : "tarek_zer"
+}, {
+  "cours" : "MAT1400",
+  "difficulte" : 5,
+  "charge" : 3,
+  "commentaire" : "Très difficile mais formateur",
+  "auteur" : "tarek_zer"
+}, {
+  "cours" : "MAT1400",
+  "difficulte" : 5,
+  "charge" : 3,
+  "commentaire" : "Très difficile mais formateur",
+  "auteur" : "tarek_zer"
+}, {
+  "cours" : "MAT1400",
+  "difficulte" : 4,
+  "charge" : 3,
+  "commentaire" : "MAT1400 est dure, mais assez faisable",
+  "auteur" : "tarek_zer"
+}, {
+  "cours" : "MAT1400",
+  "difficulte" : 5,
+  "charge" : 5,
+  "commentaire" : "j'ai trouvé mat1400 horriblement dure",
+  "auteur" : "tarek_zer"
+}, {
+  "cours" : "GÉNIE LOGICIEL",
+  "difficulte" : 3,
+  "charge" : 4,
+  "commentaire" : "très intéressant mais j'aurai aimé avoir des coéquippiers qui travaillent",
+  "auteur" : "tarek_zer"
+}, {
+  "cours" : "MAT1400",
+  "difficulte" : 3,
+  "charge" : 4,
+  "commentaire" : "omg ...",
+  "auteur" : "tarek_zer"
+}, {
+  "cours" : "IFT1015",
+  "difficulte" : 5,
+  "charge" : 3,
+  "commentaire" : "le cours qui m'a le plus marqué c IFT1015 , j'ai trouvé ca difficile",
+  "auteur" : "tarek_zer"
+} ]

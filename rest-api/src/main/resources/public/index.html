@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Catalogue de recherche de cours</title>
+  <title>Catalogue de cours</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,32 +12,41 @@
 </header>
 
 <section class="search">
-  <input type="text" id="searchInput" placeholder="Rechercher (ex: IFT, génie logiciel)">
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Rechercher par sigle ou mots-clés (ex: IFT, programmation)"
+  >
+
   <select id="termFilter">
-    <option value="">Tous les trimestres</option>
-    <option value="H25">H25</option>
-    <option value="A24">A24</option>
-    <option value="E24">E24</option>
+ 
+    <option value="winter">H25 (Hiver)</option>
+    <option value="autumn">A24 (Automne)</option>
+    <option value="summer">E24 (Été)</option>
   </select>
 </section>
 
 <section id="courses"></section>
 
-<section class="panel">
-  <h2>Comparer deux cours</h2>
-  <select id="compare1"></select>
-  <select id="compare2"></select>
-  <button onclick="compareCourses()">Comparer</button>
-  <div id="comparison"></div>
-</section>
+<div class="button-container">
+  <button class="load-more" onclick="afficherplusdecours()">Voir plus</button>
+  <button class="load-less" onclick="affichermoinsdecours()">Voir moins</button>
+</div>
+
+
 
 <section class="panel">
-  <h2>Ensemble de cours (max 6)</h2>
-  <select id="setSelect"></select>
-  <button onclick="addToSet()">Ajouter</button>
-  <ul id="courseSet"></ul>
-  <button onclick="checkConflicts()">Vérifier conflits</button>
-  <div id="conflicts"></div>
+  <h2>Comparer plusieurs cours</h2>
+
+  <input
+    type="text"
+    id="compareInput"
+    placeholder="Sigles des cours (ex: IFT2255, IFT1015, IFT1025)"
+  >
+
+  <button onclick="compareCourses()">Comparer</button>
+
+  <div id="comparison"></div>
 </section>
 
 <script src="script.js"></script>

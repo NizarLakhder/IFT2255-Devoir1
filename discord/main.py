@@ -1,99 +1,160 @@
-import aiohttp
-import asyncio
-import discord 
+import discord
 from discord.ext import commands
-import os 
+import aiohttp
+import os
+import json
+import re
 from dotenv import load_dotenv
-import logging
 
+# =========================
+# ENV
+# =========================
 load_dotenv()
-token = os.getenv('DISCORD_TOKEN', '')
-handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
+DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+MISTRAL_API_KEY = os.getenv("CLE_API")
 
+if not DISCORD_TOKEN or not MISTRAL_API_KEY:
+    raise RuntimeError("Variables d’environnement manquantes")
+
+# =========================
+# DISCORD
+# =========================
 intents = discord.Intents.default()
 intents.message_content = True
-intents.members = True
+bot = commands.Bot(command_prefix="!", intents=intents)
 
-bot = commands.Bot(command_prefix='!', intents=intents)
+# =========================
+# ÉTAT
+# =========================
+pending_reviews = {}
 
+# =========================
+# LLM CALL
+# =========================
+async def mistral_call(prompt: str) -> str:
+    async with aiohttp.ClientSession() as session:
+        async with session.post(
+            "https://api.mistral.ai/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {MISTRAL_API_KEY}",
+                "Content-Type": "application/json"
+            },
+            json={
+                "model": "mistral-small",
+                "messages": [{"role": "user", "content": prompt}],
+                "temperature": 0
+            }
+        ) as resp:
+            data = await resp.json()
+            return data["choices"][0]["message"]["content"]
+
+# =========================
+# AVIS OU PAS
+# =========================
+async def is_course_review(message: str) -> bool:
+    prompt = f"""
+Réponds STRICTEMENT par OUI ou NON.
+
+Un avis de cours :
+- mentionne un cours (ex: MAT1400, IFT2255 , Génie logiciel , programmation 1 )
+- parle de difficulté, charge ou expérience
+
+Message :
+\"\"\"{message}\"\"\"
+"""
+    return (await mistral_call(prompt)).strip().upper() == "OUI"
+
+# =========================
+# EXTRACTION AVIS
+# =========================
+def extract_json(text: str) -> dict:
+    match = re.search(r"\{.*\}", text, re.DOTALL)
+    if not match:
+        raise ValueError("JSON introuvable")
+    return json.loads(match.group())
+
+async def extract_review(message: str) -> dict:
+    prompt = f"""
+Retourne UNIQUEMENT un JSON avec :
+- cours
+- difficulte (1-5)
+- charge (1-5)
+- commentaire
+
+Message :
+\"\"\"{message}\"\"\"
+"""
+    raw = await mistral_call(prompt)
+    avis = extract_json(raw)
+
+    avis["cours"] = avis["cours"].upper()
+    avis["difficulte"] = int(avis["difficulte"])
+    avis["charge"] = int(avis["charge"])
+    avis["commentaire"] = avis["commentaire"].strip()
+
+    return avis
+
+# =========================
+# EVENTS
+# =========================
 @bot.event
 async def on_ready():
-    print(f" Bot connecté en tant que {bot.user}")
-    
-    # Pour chaque serveur où le bot est déjà présent
-    for guild in bot.guilds:
-        print(f"Envoi du message d’accueil dans {guild.name}")
-        await send_welcome_message(guild)
-
+    print("Bot prêt")
 
 @bot.event
-async def on_guild_join(guild):
-    print(f" Nouveau serveur rejoint : {guild.name}")
-    await send_welcome_message(guild)
-
-
-async def send_welcome_message(guild):
-    for channel in guild.text_channels:
-        if channel.permissions_for(guild.me).send_messages:
-            try:
-                await channel.send(
-                    f" Bonjour à tous sur **{guild.name}** ! Le bot est maintenant en ligne \n"
-                    "Voici le format attendu pour soumettre un avis :\n"
-                    "```\n"
-                    "!avis Cours: IFT2255 | Difficulté: 7 | Charge: 6 | Commentaire: Projet intéressant mais long\n"
-                    "```"
-                )
-            except Exception as e:
-                print(f" Erreur d’envoi dans {channel.name}: {e}")
-
-
-
-
-@bot.event
-async def on_message(message : discord.Message):
-   
+async def on_message(message: discord.Message):
     if message.author == bot.user:
         return
-     
-    if message.content.startswith("!avis"):
-        content = message.content[len("!avis"):].strip()
-        parts = [p.strip() for p in content.split("|")]
 
-        if len(parts) != 4:
-            await message.channel.send(" Format invalide ! Il faut 4 sections séparées par '|'.")
+    user_id = message.author.id
+    content = message.content.strip()
+
+    # ---- CONFIRMATION ----
+    if user_id in pending_reviews:
+        if content.upper() == "OUI":
+            avis = pending_reviews.pop(user_id)
+
+            async with aiohttp.ClientSession() as session:
+                async with session.post(
+                    "http://localhost:7070/api/avis",
+                    json=avis
+                ):
+                    await message.channel.send(" Avis enregistré")
             return
 
-        valid_labels = ["Cours:", "Difficulté:", "Charge:", "Commentaire:"]
-        for part, expected in zip(parts, valid_labels):
-            if not part.startswith(expected):
-                await message.channel.send(f" La section '{expected}' est manquante ou mal placée.")
-                return
+        if content.upper() == "NON":
+            pending_reviews.pop(user_id)
+            await message.channel.send(" Avis annulé")
+            return
 
-        cours = parts[0].split(":", 1)[1].strip()
-        difficulte = parts[1].split(":", 1)[1].strip()
-        charge = parts[2].split(":", 1)[1].strip()
-        commentaire = parts[3].split(":", 1)[1].strip()
+        await message.channel.send("Merci de répondre par OUI ou NON.")
+        return
 
-       
-        payload = {
-            "cours": cours,
-            "difficulte": difficulte,
-            "charge": charge,
-            "commentaire": commentaire,
-            "auteur": str(message.author)
-        }
-        async with aiohttp.ClientSession() as session:
-            async with session.post("http://localhost:7070/api/avis", json=payload) as response:
+    # ---- DÉTECTION ----
+    if not await is_course_review(content):
+        await message.channel.send(" Ce message ne concerne pas un avis de cours.")
+        return
 
-            
-                if response.status == 201:
-                    await message.channel.send(" Avis reçu et enregistré avec succès !")
-                else:
-                    txt = await response.text()
-                    await message.channel.send(f" Erreur lors de l’envoi ({response.status}): {txt}")
+    # ---- EXTRACTION ----
+    try:
+        avis = await extract_review(content)
+    except Exception:
+        await message.channel.send(" Je n’ai pas compris l’avis.")
+        return
 
+    avis["auteur"] = str(message.author)
+    pending_reviews[user_id] = avis
 
- 
-    await bot.process_commands(message)
- 
-bot.run(token , log_handler= handler , log_level= logging.DEBUG )
+    await message.channel.send(
+        f" J’ai compris :\n"
+        f"Cours : {avis['cours']}\n"
+        f"Difficulté : {avis['difficulte']} / 5\n"
+        f"Charge : {avis['charge']} / 5\n"
+        f"Commentaire : {avis['commentaire']}\n\n"
+        "Confirme-tu ? (OUI / NON)"
+    )
+
+# =========================
+# RUN
+# =========================
+bot.run(DISCORD_TOKEN)

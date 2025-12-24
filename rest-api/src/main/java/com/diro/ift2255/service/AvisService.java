@@ -7,7 +7,7 @@ import java.io.File;
 import java.util.*;
 
 public class AvisService implements IService<Avis>{
-    private static final String FILE_PATH = "dataDiscord/avis.json";
+    private static final String FILE_PATH = "data/avis.json";
     private final ObjectMapper mapper = new ObjectMapper();
 
     public List<Avis> lireAvis() {

@@ -2,7 +2,6 @@ body {
   font-family: Arial, sans-serif;
   background: #f4f6f8;
   margin: 0;
-  padding: 0;
 }
 
 header {
@@ -19,7 +18,8 @@ header {
   background: white;
 }
 
-.search input, .search select {
+.search input,
+.search select {
   padding: 10px;
   font-size: 16px;
   flex: 1;
@@ -39,10 +39,6 @@ header {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.course h3 {
-  margin-top: 0;
-}
-
 .panel {
   background: white;
   margin: 20px;
@@ -50,18 +46,235 @@ header {
   border-radius: 6px;
 }
 
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
 button {
-  padding: 8px 12px;
-  margin-top: 10px;
+  padding: 10px 14px;
   cursor: pointer;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+.load-more,
+.load-less {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 999px;
+}
+
+.load-more:hover,
+.load-less:hover {
+  background-color: #1e40af;
 }
 
 .conflict {
   color: red;
-  font-weight: bold;
+}
+
+#course-details {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+#course-details h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+  color: #1e293b;
+}
+
+#course-details p {
+  font-size: 16px;
+  color: #334155;
+
+  line-height: 1.6;
+}
+
+#course-details h3 {
+  margin-top: 32px;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #e5e7eb;
+  color: #2563eb;
+  font-size: 22px;
+}
+
+.schedule {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+}
+.schedule h4 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  color: #0f172a;
+}
+
+.section {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 10px;
+  background: #ffffff;
+  border-left: 5px solid #2563eb;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+
+}
+
+.section h5 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #1e40af;
+}
+
+.volet {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #eff6ff;
+}
+
+.volet strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #1d4ed8;
+}
+.activity {
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 6px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.section:hover,
+.schedule:hover,
+.activity:hover {
+  transform: translateY(-2px);
+  transition: all 0.2s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.course {
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.course:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  border-color: #2563eb;
+}
+
+.course h3 {
+  color: #2563eb;
+}
+
+.panel {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  margin-top: 2rem;
+}
+
+/* Panel comparaison */
+.panel {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Titre */
+.panel h2 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Zone de saisie + bouton */
+.panel input[type="text"] {
+  width: 420px;
+  max-width: 100%;
+  padding: 12px 14px;
+  font-size: 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.panel input[type="text"]:focus {
+  border-color: #2563eb;
+}
+
+/* Bouton comparer */
+.panel button {
+  margin-left: 10px;
+  padding: 12px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.panel button:hover {
+  background: #1e40af;
+}
+
+/* Zone résultat */
+#comparison {
+  margin-top: 28px;
+}
+
+/* Table de comparaison */
+#comparison table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  font-size: 15px;
+}
+
+#comparison th,
+#comparison td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+#comparison th:first-child,
+#comparison td:first-child {
+  text-align: left;
+  font-weight: 600;
+}
+
+#comparison thead th {
+  background: #f9fafb;
+  font-weight: 700;
+}
+
+#comparison tbody tr:hover {
+  background: #f9fafb;
 }

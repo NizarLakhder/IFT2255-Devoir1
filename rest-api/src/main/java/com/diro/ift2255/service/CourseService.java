@@ -9,91 +9,104 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.URI;
 import java.util.*;
 
-public class CourseService implements IService<Course> {
+public class CourseService {
+
+    private static final String BASE_URL =
+            "https://planifium-api.onrender.com/api/v1/courses";
+
     private final HttpClientApi httpClient;
     private final ObjectMapper mapper = new ObjectMapper();
-    private static final String BASE_URL = "https://planifium-api.onrender.com/api/v1/courses";
 
     public CourseService(HttpClientApi httpClient) {
         this.httpClient = httpClient;
     }
 
-    // Recherche un cours par sigle
-    public List<Course> rechercherCours(String sigle) {
+    public List<Course> fetchCourses(
+            String ids,
+            String name,
+            String description,
+            boolean includeSchedule,
+            String semester,
+            String level
+    ) {
+
         try {
-            String url = BASE_URL + "?sigle=" + sigle.toUpperCase();
-            HttpClientApiResponse response = httpClient.get(URI.create(url));
+            StringBuilder url = new StringBuilder(BASE_URL + "?");
+
+            if (ids != null && !ids.isBlank()) {
+                url.append("courses_sigle=").append(ids.toLowerCase()).append("&");
+            }
+            if (name != null) {
+                url.append("name=").append(name).append("&");
+            }
+            if (description != null) {
+                url.append("description=").append(description).append("&");
+            }
+            if (includeSchedule) {
+                url.append("include_schedule=true&");
+                if (semester != null) {
+                    url.append("schedule_semester=").append(semester).append("&");
+                }
+            }
+            if (level != null) {
+                url.append("response_level=").append(level).append("&");
+            }
+
+            HttpClientApiResponse response =
+                    httpClient.get(URI.create(url.toString()));
 
             if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
-                return mapper.readValue(response.getBody(), new TypeReference<List<Course>>() {});
-            } else {
-                System.err.println("Erreur API (rechercheCours): " + response.getStatusMessage());
-                return Collections.emptyList();
+                return mapper.readValue(
+                        response.getBody(),
+                        new TypeReference<List<Course>>() {}
+                );
             }
         } catch (Exception e) {
-            System.err.println("Erreur lors de la recherche du cours : " + e.getMessage());
-            return Collections.emptyList();
+            System.err.println("Erreur API Planifium: " + e.getMessage());
         }
+
+        return Collections.emptyList();
     }
 
-    // Détails d’un cours
-    public Course getCoursParCode(String sigle) {
+    public Course fetchCourseById(
+            String id,
+            boolean includeSchedule,
+            String semester,
+            String level
+    ) {
+
         try {
-            String url = BASE_URL + "/" + sigle.toUpperCase();
-            HttpClientApiResponse response = httpClient.get(URI.create(url));
+            StringBuilder url = new StringBuilder(BASE_URL + "/" + id.toLowerCase() + "?");
+
+            if (includeSchedule) {
+                url.append("include_schedule=true&");
+                if (semester != null) {
+                    url.append("schedule_semester=").append(semester).append("&");
+                }
+            }
+            if (level != null) {
+                url.append("response_level=").append(level);
+            }
+
+            HttpClientApiResponse response =
+                    httpClient.get(URI.create(url.toString()));
 
             if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
                 return mapper.readValue(response.getBody(), Course.class);
-            } else {
-                System.err.println("Erreur API (getCoursParCode): " + response.getStatusMessage());
-                return null;
             }
         } catch (Exception e) {
-            System.err.println("Erreur lors du chargement du cours : " + e.getMessage());
-            return null;
+            System.err.println("Erreur API Planifium: " + e.getMessage());
         }
+
+        return null;
     }
 
-    // Compare plusieurs cours
     public List<Course> getCoursParCodes(String[] sigles) {
         List<Course> list = new ArrayList<>();
         for (String sigle : sigles) {
-            Course c = getCoursParCode(sigle.trim());
+            Course c = fetchCourseById(sigle.trim(), false, null, "reg");
             if (c != null) list.add(c);
         }
         return list;
     }
-
-    public List<Course> getAllCourses(String sigle) {
-        return rechercherCours(sigle);
-    }
-
-    public Course getCourseById(String id) {
-        return getCoursParCode(id);
-    }
-   @Override
-public List<Course> getAll() {
-    return getAllCourses("");
-}
-
-@Override
-public Course getById(String id) {
-    return getCourseById(id);
-}
-
-@Override
-public void create(Course entity) {
-    throw new UnsupportedOperationException("Not supported.");
-}
-
-@Override
-public void update(String id, Course entity) {
-    throw new UnsupportedOperationException("Not supported.");
-}
-
-@Override
-public void delete(String id) {
-    throw new UnsupportedOperationException("Not supported.");
-}
-
 }
