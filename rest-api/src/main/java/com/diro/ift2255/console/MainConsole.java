@@ -40,7 +40,6 @@ public class MainConsole {
 
             switch (choix) {
 
-                // 🔹 Recherche de cours
                 case 1 -> {
                     System.out.print("\nEntrez le sigle (ex: IFT2255) : ");
                     String sigle = sc.nextLine();

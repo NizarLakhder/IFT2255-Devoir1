@@ -18,7 +18,10 @@ public class AvisController {
             ctx.status(500).json(ResponseUtil.formatError("Erreur lors de l’ajout de l’avis : " + e.getMessage()));
         }
     }
-
+    public void getAvisByCourse(Context ctx) {
+    String courseId = ctx.pathParam("course");
+    ctx.json(avisService.getByCourse(courseId));
+}
     public void getAllAvis(Context ctx) {
         ctx.json(avisService.lireAvis());
     }

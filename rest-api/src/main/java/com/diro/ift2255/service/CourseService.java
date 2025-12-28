@@ -1,4 +1,9 @@
+
+
+
 package com.diro.ift2255.service;
+import com.diro.ift2255.model.EligibilityRequest;
+import com.diro.ift2255.model.EligibilityResult;
 
 import com.diro.ift2255.model.Course;
 import com.diro.ift2255.util.HttpClientApi;
@@ -68,6 +73,71 @@ public class CourseService {
         return Collections.emptyList();
     }
 
+    
+    
+    public EligibilityResult checkEligibility(
+        Course course,
+        EligibilityRequest request
+) {
+    if (course == null) {
+        return new EligibilityResult(
+                false,
+                List.of(),
+                "Cours introuvable"
+        );
+    }
+
+    // 1️⃣ Vérification des prérequis
+    List<String> prerequisites =
+            course.getPrerequisite_courses() == null
+                    ? List.of()
+                    : course.getPrerequisite_courses();
+
+    List<String> completed =
+            request.getCompletedCourses() == null
+                    ? List.of()
+                    : request.getCompletedCourses();
+
+    List<String> missing = prerequisites.stream()
+            .filter(p -> completed.stream()
+                    .noneMatch(c -> c.equalsIgnoreCase(p)))
+            .toList();
+
+    if (!missing.isEmpty()) {
+        return new EligibilityResult(
+                false,
+                missing,
+                "Prérequis non satisfaits"
+        );
+    }
+
+    // 2️⃣ Vérification du cycle (simplifiée mais valide)
+    String cycle = request.getCycle();
+
+    if (cycle == null || cycle.isBlank()) {
+        return new EligibilityResult(
+                false,
+                List.of(),
+                "Cycle non spécifié"
+        );
+    }
+
+    if (!cycle.equalsIgnoreCase("bac")) {
+        return new EligibilityResult(
+                false,
+                List.of(),
+                "Cours réservé au baccalauréat"
+        );
+    }
+
+    // ✅ Tout est bon
+    return new EligibilityResult(
+            true,
+            List.of(),
+            "Étudiant éligible à ce cours"
+    );
+}
+    
     public Course fetchCourseById(
             String id,
             boolean includeSchedule,

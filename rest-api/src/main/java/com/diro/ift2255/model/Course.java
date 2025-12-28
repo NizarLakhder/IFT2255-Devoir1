@@ -6,7 +6,7 @@ import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Course {
-
+    private List<String> prerequisite_courses;
     private String id;
     private String name;
     private double credits;
@@ -76,4 +76,14 @@ public class Course {
     public void setSchedules(List<Object> schedules) {
         this.schedules = schedules;
     }
+
+    public List<String> getPrerequisite_courses() {
+    return prerequisite_courses;
+}
+
+public void setPrerequisite_courses(List<String> prerequisite_courses) {
+    this.prerequisite_courses = prerequisite_courses;
+}
+
+
 }

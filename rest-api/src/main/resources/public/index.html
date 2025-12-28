@@ -36,7 +36,7 @@
 
 
 <section class="panel">
-  <h2>Comparer plusieurs cours</h2>
+  <h2>Comparer deux ou  plusieurs cours</h2>
 
   <input
     type="text"
@@ -49,6 +49,90 @@
   <div id="comparison"></div>
 </section>
 
+<section class="panel">
+  <h2>Vérifier un conflit d’horaire</h2>
+
+  <input
+    type="text"
+    id="conflictInput"
+    placeholder="Ex: IFT2255, MAT1400"
+  >
+
+  <select id="conflictTerm">
+    <option value="winter">H25 (Hiver)</option>
+    <option value="autumn">A24 (Automne)</option>
+    <option value="summer">E24 (Été)</option>
+  </select>
+
+  <button class="btn-primary" onclick="checkConflictBetweenTwoCourses()">
+    Vérifier le conflit
+  </button>
+
+  <div id="conflictSchedules"></div>
+<div id="conflictResult"></div>
+</section>
+<section class="panel">
+  <h2>Vérifier l’éligibilité à un cours</h2>
+
+  <label for="targetCourse">
+    Cours à vérifier
+  </label>
+  <input
+    type="text"
+    id="targetCourse"
+    placeholder="Ex: IFT2255"
+  >
+
+  <label for="completedCourses">
+    Cours complétés
+  </label>
+  <input
+    type="text"
+    id="completedCourses"
+    placeholder="Ex: IFT1015, IFT1025"
+  >
+
+  <label for="cycle">
+    Cycle d’études
+  </label>
+  <select id="cycle">
+    <option value="bac">Baccalauréat</option>
+    <option value="maitrise">Maîtrise</option>
+  </select>
+
+  <button onclick="checkEligibility()">
+    Vérifier l’éligibilité
+  </button>
+
+  <div id="eligibilityResult"></div>
+</section>
+<section class="panel">
+  <h2>Cours par programme</h2>
+
+  <input
+    type="text"
+    id="programId"
+    placeholder="Ex : 117510"
+  >
+
+  <button onclick="goToProgramPage()">
+    Voir les cours du programme
+  </button>
+</section>
+
+<script>
+function goToProgramPage() {
+  const programId = document.getElementById("programId").value.trim();
+
+  if (!programId) {
+    alert("Veuillez entrer un identifiant de programme");
+    return;
+  }
+
+  window.location.href = "program.html?id=" + programId;
+}
+</script>
 <script src="script.js"></script>
+<script src="course.js"></script>
 </body>
 </html>

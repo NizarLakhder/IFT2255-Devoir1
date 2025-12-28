@@ -3,7 +3,8 @@ package com.diro.ift2255.controller;
 import io.javalin.http.Context;
 import com.diro.ift2255.model.Course;
 import com.diro.ift2255.service.CourseService;
-
+import com.diro.ift2255.model.EligibilityRequest;
+import com.diro.ift2255.model.EligibilityResult;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,45 @@ public class CourseController {
         this.courseService = courseService;
     }
 
+    public void searchCourses(Context ctx) {
+    getCourses(ctx);
+}
+    
+    
     /**
+ * POST /courses/{id}/eligibility
+ */
+public void checkEligibility(Context ctx) {
+
+    String courseId = ctx.pathParam("id");
+
+    EligibilityRequest request =
+            ctx.bodyAsClass(EligibilityRequest.class);
+
+    Course course = courseService.fetchCourseById(
+            courseId,
+            false,
+            null,
+            "full"
+    );
+
+    EligibilityResult result =
+            courseService.checkEligibility(course, request);
+
+    ctx.json(result);
+}
+
+
+
+
+
+
+
+
+
+
+
+/**
      * GET /courses
      * Exemples :
      *  - /courses?courses_sigle=ift1015,ift1025
@@ -26,44 +65,67 @@ public class CourseController {
      */
     public void getCourses(Context ctx) {
 
-        // --- paramètres Planifium ---
-        String coursesSigle = ctx.queryParam("courses_sigle");
-        String name = ctx.queryParam("name");
-        String description = ctx.queryParam("description");
+    // ==========================
+    // PARAMÈTRES FRONTEND (WRAPPER)
+    // ==========================
 
-        // include_schedule (false par défaut)
-        boolean includeSchedule =
-                "true".equalsIgnoreCase(ctx.queryParam("include_schedule"));
+    // Paramètre simplifié côté frontend
+    String ids = ctx.queryParam("ids");
 
-        // schedule_semester (optionnel)
-        String semester = ctx.queryParam("schedule_semester");
+    // Paramètres Planifium natifs (compatibilité)
+    String coursesSigle = ctx.queryParam("courses_sigle");
+    String name = ctx.queryParam("name");
+    String description = ctx.queryParam("description");
 
-        // response_level (reg par défaut)
-        String responseLevel = ctx.queryParam("response_level");
-        if (responseLevel == null) {
-            responseLevel = "reg";
-        }
-
-        // --- appel au service ---
-        List<Course> courses = courseService.fetchCourses(
-                coursesSigle,
-                name,
-                description,
-                includeSchedule,
-                semester,
-                responseLevel
-        );
-
-        // --- réponse HTTP ---
-        if (courses.isEmpty()) {
-            ctx.status(404).json(
-                    Map.of("message", "Aucun cours trouvé")
-            );
-        } else {
-            ctx.json(courses);
-        }
+    // Priorité au paramètre frontend "ids"
+    if (ids != null && !ids.isBlank()) {
+        coursesSigle = ids;
     }
 
+    // include_schedule (false par défaut)
+    boolean includeSchedule =
+            "true".equalsIgnoreCase(ctx.queryParam("include_schedule"));
+
+    // schedule_semester (optionnel)
+    String semester = ctx.queryParam("schedule_semester");
+
+    // response_level (reg par défaut)
+    String responseLevel = ctx.queryParam("response_level");
+    if (responseLevel == null || responseLevel.isBlank()) {
+        responseLevel = "reg";
+    }
+
+   
+    
+   
+   
+   
+   
+   
+   
+    // ==========================
+    // APPEL AU SERVICE
+    // ==========================
+    List<Course> courses = courseService.fetchCourses(
+            coursesSigle,
+            name,
+            description,
+            includeSchedule,
+            semester,
+            responseLevel
+    );
+
+    // ==========================
+    // RÉPONSE HTTP
+    // ==========================
+    if (courses.isEmpty()) {
+        ctx.status(404).json(
+                Map.of("message", "Aucun cours trouvé")
+        );
+    } else {
+        ctx.json(courses);
+    }
+}
     /**
      * GET /courses/{id}
      * Exemples :

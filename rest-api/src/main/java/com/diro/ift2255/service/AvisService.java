@@ -24,6 +24,12 @@ public class AvisService implements IService<Avis>{
         }
     }
 
+    
+   public List<Avis> getByCourse(String courseId) {
+    return lireAvis().stream()
+        .filter(a -> a.getCours().equalsIgnoreCase(courseId))
+        .toList();
+}
     public void ajouterAvis(Avis avis) {
         List<Avis> avisList = lireAvis();
         avisList.add(avis);

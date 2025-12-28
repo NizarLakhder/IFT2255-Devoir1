@@ -1,55 +1,37 @@
 [ {
+  "cours" : "IFT2255",
+  "difficulte" : 3,
+  "charge" : 4,
+  "commentaire" : " j'esprère que j'aurai la clémence du professeur et du correcteur. Mais globalement cours assez intéréssant qui nous apprend les fondements du génie logiciel",
+  "auteur" : "tarek_zer"
+}, {
   "cours" : "MAT1400",
-  "difficulte" : 10,
-  "charge" : 6,
-  "commentaire" : "cours extremement difficile",
+  "difficulte" : 5,
+  "charge" : 5,
+  "commentaire" : "je trouve MAT1400 extremement dure",
+  "auteur" : "tarek_zer"
+}, {
+  "cours" : "MAT1600",
+  "difficulte" : 2,
+  "charge" : 2,
+  "commentaire" : "Cours assez facile",
+  "auteur" : "tarek_zer"
+}, {
+  "cours" : "IFT2105",
+  "difficulte" : 5,
+  "charge" : 5,
+  "commentaire" : "IFT2105 est une phobie sans nom",
+  "auteur" : "tarek_zer"
+}, {
+  "cours" : "IFT1575",
+  "difficulte" : 3,
+  "charge" : 3,
+  "commentaire" : "ift1575 parait dure mais ne l'es pas vraiment ...",
   "auteur" : "tarek_zer"
 }, {
   "cours" : "IFT2255",
   "difficulte" : 4,
   "charge" : 5,
-  "commentaire" : "Projet exigeant mais formateur",
-  "auteur" : "tarek_zer"
-}, {
-  "cours" : "MAT1400",
-  "difficulte" : 5,
-  "charge" : 3,
-  "commentaire" : "Très difficile mais formateur",
-  "auteur" : "tarek_zer"
-}, {
-  "cours" : "MAT1400",
-  "difficulte" : 5,
-  "charge" : 3,
-  "commentaire" : "Très difficile mais formateur",
-  "auteur" : "tarek_zer"
-}, {
-  "cours" : "MAT1400",
-  "difficulte" : 4,
-  "charge" : 3,
-  "commentaire" : "MAT1400 est dure, mais assez faisable",
-  "auteur" : "tarek_zer"
-}, {
-  "cours" : "MAT1400",
-  "difficulte" : 5,
-  "charge" : 5,
-  "commentaire" : "j'ai trouvé mat1400 horriblement dure",
-  "auteur" : "tarek_zer"
-}, {
-  "cours" : "GÉNIE LOGICIEL",
-  "difficulte" : 3,
-  "charge" : 4,
-  "commentaire" : "très intéressant mais j'aurai aimé avoir des coéquippiers qui travaillent",
-  "auteur" : "tarek_zer"
-}, {
-  "cours" : "MAT1400",
-  "difficulte" : 3,
-  "charge" : 4,
-  "commentaire" : "omg ...",
-  "auteur" : "tarek_zer"
-}, {
-  "cours" : "IFT1015",
-  "difficulte" : 5,
-  "charge" : 3,
-  "commentaire" : "le cours qui m'a le plus marqué c IFT1015 , j'ai trouvé ca difficile",
+  "commentaire" : "J'ai eu beaucoup de difficultés , J'espère la clémence du correcteur.",
   "auteur" : "tarek_zer"
 } ]
