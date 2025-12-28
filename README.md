@@ -109,3 +109,11 @@ Pour éxécuter les tests :
 
 cd IFT2255-Devoir3/rest-api
 mvn  test 
+
+## Lien vers la vidéo youtube de démonstration .
+
+https://youtu.be/Zj2Tmzm4HTA?si=d2NYkGHUg6zv77T3
+
+## d'invitation vers le serveur discord la ou les avis ont été collectés
+
+https://discord.gg/XFYGuvuw
