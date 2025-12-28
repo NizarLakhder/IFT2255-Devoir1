@@ -95,7 +95,7 @@ IFT2255-Devoir3/
 
 
 git clone 
-cd IFT2255-Devoir3/rest-api
+cd IFT2255-Devoir1/rest-api
 mvn clean compile 
 mvn exec:java -D exec.mainClass="com.diro.ift2255.Main"
 
@@ -103,6 +103,9 @@ mvn exec:java -D exec.mainClass="com.diro.ift2255.Main"
 Pour lancer la jar 
 cd rest-api/
 mvn clean package
-target/rest-api-1.0-SNAPSHOT.jar
+java -jar target/rest-api-1.0-SNAPSHOT.jar
 
+Pour éxécuter les tests :
 
+cd IFT2255-Devoir3/rest-api
+mvn  test 

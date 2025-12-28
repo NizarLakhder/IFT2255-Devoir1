@@ -1,352 +1,318 @@
+/* =========================
+   VARIABLES GLOBALES
+========================= */
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
+  --bg: #f1f5f9;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #475569;
+  --border: #e5e7eb;
+  --success-bg: #dcfce7;
+  --success-text: #166534;
+  --error-bg: #fee2e2;
+  --error-text: #991b1b;
+}
+
+/* =========================
+   BASE
+========================= */
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
   margin: 0;
+  line-height: 1.6;
 }
 
 header {
-  background: #32609d;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
   color: white;
-  padding: 20px;
+  padding: 32px 20px;
   text-align: center;
 }
 
+header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+/* =========================
+   BARRE DE RECHERCHE
+========================= */
 .search {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 12px;
   padding: 20px;
-  background: white;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
 }
 
 .search input,
 .search select {
-  padding: 10px;
-  font-size: 16px;
+  padding: 12px 14px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
   flex: 1;
+  min-width: 220px;
 }
 
+.search input:focus,
+.search select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* =========================
+   CATALOGUE DE COURS
+========================= */
 #courses {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 15px;
-  padding: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 28px;
 }
 
 .course {
-  background: white;
-  padding: 15px;
-  border-radius: 6px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.panel {
-  background: white;
-  margin: 20px;
-  padding: 20px;
-  border-radius: 6px;
-}
-
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-button {
-  padding: 10px 14px;
-  cursor: pointer;
-}
-
-.load-more,
-.load-less {
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 999px;
-}
-
-.load-more:hover,
-.load-less:hover {
-  background-color: #1e40af;
-}
-
-.conflict {
-  color: red;
-}
-
-#course-details {
-  max-width: 1000px;
-  margin: 30px auto;
-  padding: 24px;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
-
-#course-details h2 {
-  font-size: 28px;
-  margin-bottom: 8px;
-  color: #1e293b;
-}
-
-#course-details p {
-  font-size: 16px;
-  color: #334155;
-
-  line-height: 1.6;
-}
-
-#course-details h3 {
-  margin-top: 32px;
-  margin-bottom: 12px;
-  padding-bottom: 6px;
-  border-bottom: 2px solid #e5e7eb;
-  color: #2563eb;
-  font-size: 22px;
-}
-
-.schedule {
-  margin-top: 20px;
+  background: var(--card);
+  border-radius: 14px;
+  border: 1px solid var(--border);
   padding: 18px;
-  border-radius: 10px;
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
-}
-.schedule h4 {
-  margin: 0 0 12px 0;
-  font-size: 18px;
-  color: #0f172a;
-}
-
-.section {
-  margin-top: 16px;
-  padding: 16px;
-  border-radius: 10px;
-  background: #ffffff;
-  border-left: 5px solid #2563eb;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-
-
-}
-
-.section h5 {
-  margin: 0 0 8px 0;
-  font-size: 16px;
-  color: #1e40af;
-}
-
-.volet {
-  margin-top: 12px;
-  padding: 12px;
-  border-radius: 8px;
-  background: #eff6ff;
-}
-
-.volet strong {
-  display: block;
-  margin-bottom: 6px;
-  color: #1d4ed8;
-}
-.activity {
-  margin-top: 8px;
-  padding: 10px;
-  border-radius: 6px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  font-size: 14px;
-}
-
-.section:hover,
-.schedule:hover,
-.activity:hover {
-  transform: translateY(-2px);
-  transition: all 0.2s ease;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-.course {
-  padding: 16px;
-  background: #ffffff;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.course h3 {
+  margin: 0 0 6px 0;
+  color: var(--primary);
+  font-size: 18px;
+}
+
+.course p {
+  margin: 4px 0;
+  color: var(--muted);
+  font-size: 14px;
 }
 
 .course:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-  border-color: #2563eb;
+  border-color: var(--primary);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.12);
 }
 
-.course h3 {
-  color: #2563eb;
+/* =========================
+   BOUTONS VOIR PLUS / MOINS
+========================= */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 20px 0 40px;
 }
 
-.panel {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 6px;
-  border: 1px solid #e5e7eb;
-  margin-top: 2rem;
+button {
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
 }
 
-/* Panel comparaison */
+.load-more,
+.load-less {
+  background: var(--primary);
+  color: white;
+}
+
+.load-more:hover,
+.load-less:hover {
+  background: var(--primary-dark);
+}
+
+/* =========================
+   PANELS GÉNÉRAUX
+========================= */
 .panel {
   max-width: 1100px;
   margin: 40px auto;
-  padding: 32px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  padding: 28px;
+  background: var(--card);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-/* Titre */
 .panel h2 {
-  margin-bottom: 20px;
+  margin-top: 0;
   font-size: 26px;
-  font-weight: 700;
-  color: #111827;
+  color: var(--text);
 }
 
-/* Zone de saisie + bouton */
-.panel input[type="text"] {
-  width: 420px;
-  max-width: 100%;
-  padding: 12px 14px;
-  font-size: 15px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  outline: none;
-  transition: border-color 0.2s ease;
-}
-
-.panel input[type="text"]:focus {
-  border-color: #2563eb;
-}
-
-/* Bouton comparer */
+/* =========================
+   BOUTONS PRINCIPAUX
+========================= */
+.btn-primary,
 .panel button {
-  margin-left: 10px;
+  background: var(--primary);
+  color: white;
+  border-radius: 8px;
   padding: 12px 18px;
-  font-size: 15px;
-  font-weight: 500;
-  background: #2563eb;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s ease;
+  font-size: 14px;
 }
 
+.btn-primary:hover,
 .panel button:hover {
-  background: #1e40af;
+  background: var(--primary-dark);
 }
 
-/* Zone résultat */
-#comparison {
-  margin-top: 28px;
-}
-
-/* Table de comparaison */
+/* =========================
+   COMPARAISON
+========================= */
 #comparison table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 16px;
-  font-size: 15px;
+  margin-top: 20px;
+  font-size: 14px;
 }
 
 #comparison th,
 #comparison td {
-  padding: 14px 16px;
-  border-bottom: 1px solid #e5e7eb;
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
   text-align: center;
 }
 
 #comparison th:first-child,
 #comparison td:first-child {
   text-align: left;
-  font-weight: 600;
 }
 
-#comparison thead th {
-  background: #f9fafb;
-  font-weight: 700;
+#comparison tr:hover {
+  background: #f8fafc;
 }
 
-#comparison tbody tr:hover {
-  background: #f9fafb;
+/* =========================
+   PAGE DÉTAIL COURS
+========================= */
+#course-details {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 32px;
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
-
-.btn-primary {
-  background-color: #0d6efd;      /* bleu académique */
-  color: #ffffff;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+#course-details h2 {
+  margin-top: 0;
+  font-size: 30px;
 }
 
-.btn-primary:hover {
-  background-color: #0b5ed7;
+#course-details h3 {
+  margin-top: 32px;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 6px;
+  color: var(--primary);
 }
 
-.btn-primary:active {
-  transform: scale(0.97);
-}
-
-.btn-primary:disabled {
-  background-color: #adb5bd;
-  cursor: not-allowed;
-}
-
-.panel {
-  background: #f8f9fa;
-  padding: 16px;
-  border-radius: 6px;
+.schedule {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--border);
   margin-top: 20px;
 }
 
-.btn-primary {
-  background-color: #0d6efd;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  margin-left: 8px;
+.section {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--card);
+  border-left: 4px solid var(--primary);
 }
 
-.btn-primary:hover {
-  background-color: #0b5ed7;
+.volet {
+  margin-top: 12px;
+  background: #eff6ff;
+  padding: 12px;
+  border-radius: 10px;
 }
 
+.activity {
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  background: white;
+  border: 1px solid var(--border);
+  font-size: 14px;
+}
+
+/* =========================
+   MESSAGES
+========================= */
 .success {
-  background: #d1e7dd;
-  color: #0f5132;
-  padding: 10px;
-  border-radius: 6px;
-  margin-top: 10px;
+  background: var(--success-bg);
+  color: var(--success-text);
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 12px;
 }
 
+.error,
 .conflict {
-  background: #f8d7da;
-  color: #842029;
-  padding: 10px;
-  border-radius: 6px;
-  margin-top: 10px;
+  background: var(--error-bg);
+  color: var(--error-text);
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 12px;
 }
 
-.error {
-  background: #f8d7da;
-  color: #842029;
-  padding: 10px;
-  border-radius: 6px;
-  margin-top: 10px;
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 700px) {
+  header h1 {
+    font-size: 24px;
+  }
+
+  .panel {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  #course-details {
+    margin: 20px;
+    padding: 20px;
+  }
+}
+
+.search {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 24px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  justify-content: center;
+}
+
+#compareInput {
+  width: 100%;
+  max-width: 700px;     
+  padding: 16px 18px;    
+
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  outline: none;
+}
+
+#compareInput:focus {
+  border-color: #2563eb;
 }
