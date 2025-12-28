@@ -1,37 +1,19 @@
 [ {
   "cours" : "IFT2255",
-  "difficulte" : 3,
+  "difficulte" : 4,
   "charge" : 4,
-  "commentaire" : " j'esprère que j'aurai la clémence du professeur et du correcteur. Mais globalement cours assez intéréssant qui nous apprend les fondements du génie logiciel",
-  "auteur" : "tarek_zer"
-}, {
-  "cours" : "MAT1400",
-  "difficulte" : 5,
-  "charge" : 5,
-  "commentaire" : "je trouve MAT1400 extremement dure",
-  "auteur" : "tarek_zer"
-}, {
-  "cours" : "MAT1600",
-  "difficulte" : 2,
-  "charge" : 2,
-  "commentaire" : "Cours assez facile",
-  "auteur" : "tarek_zer"
-}, {
-  "cours" : "IFT2105",
-  "difficulte" : 5,
-  "charge" : 5,
-  "commentaire" : "IFT2105 est une phobie sans nom",
-  "auteur" : "tarek_zer"
-}, {
-  "cours" : "IFT1575",
-  "difficulte" : 3,
-  "charge" : 3,
-  "commentaire" : "ift1575 parait dure mais ne l'es pas vraiment ...",
-  "auteur" : "tarek_zer"
+  "commentaire" : "Bon cours",
+  "auteur" : "Alice"
 }, {
   "cours" : "IFT2255",
-  "difficulte" : 4,
+  "difficulte" : 5,
   "charge" : 5,
-  "commentaire" : "J'ai eu beaucoup de difficultés , J'espère la clémence du correcteur.",
-  "auteur" : "tarek_zer"
+  "commentaire" : "Difficile",
+  "auteur" : "Bob"
+}, {
+  "cours" : "IFT1025",
+  "difficulte" : 3,
+  "charge" : 2,
+  "commentaire" : "Correct",
+  "auteur" : "Charlie"
 } ]

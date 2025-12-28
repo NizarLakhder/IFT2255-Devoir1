@@ -12,6 +12,35 @@ let courses = [];
 const courseSet = [];
 let visibleCount = 5;
 
+let loadingInterval = null;
+
+// une petite animation pour le chargement des cours 
+function showGlobalLoading() {
+  const loading = document.getElementById("global-loading");
+  const dots = document.getElementById("global-dots");
+
+  if (!loading || !dots) return;
+
+  loading.style.display = "block";
+
+  let count = 1;
+  dots.textContent = ".";
+
+  loadingInterval = setInterval(() => {
+    count = (count % 3) + 1;
+    dots.textContent = ".".repeat(count);
+  }, 400);
+}
+
+function hideGlobalLoading() {
+  const loading = document.getElementById("global-loading");
+  if (loading) loading.style.display = "none";
+
+  if (loadingInterval) {
+    clearInterval(loadingInterval);
+    loadingInterval = null;
+  }
+}
 // uutilitaires 
 async function getAvisAggreges(courseId) {
   try {
@@ -65,6 +94,7 @@ async function getResultatsAggreges(courseId) {
 
 // fonction loadResultats
 async function loadResultats(courseId) {
+ 
   try {
     const res = await fetch(`/resultats/${courseId}`);
 
@@ -89,6 +119,8 @@ async function loadResultats(courseId) {
 // CHARGEMENT DES COURS
 // ==========================
 async function loadCourses() {
+  
+  showGlobalLoading();   
   try {
     const res = await fetch("/courses");
     const raw = await res.json();
@@ -112,7 +144,7 @@ async function loadCourses() {
     }
 
     renderCatalogue();
-
+    hideGlobalLoading();
   } catch (err) {
     console.error("Erreur catalogue", err);
   }

@@ -87,7 +87,7 @@ public class CourseService {
         );
     }
 
-    // 1️⃣ Vérification des prérequis
+    // 1️ Vérification des prérequis
     List<String> prerequisites =
             course.getPrerequisite_courses() == null
                     ? List.of()
@@ -111,7 +111,7 @@ public class CourseService {
         );
     }
 
-    // 2️⃣ Vérification du cycle (simplifiée mais valide)
+    // 2️ Vérification du cycle (simplifiée mais valide)
     String cycle = request.getCycle();
 
     if (cycle == null || cycle.isBlank()) {
@@ -130,7 +130,7 @@ public class CourseService {
         );
     }
 
-    // ✅ Tout est bon
+    //  Tout est bon
     return new EligibilityResult(
             true,
             List.of(),

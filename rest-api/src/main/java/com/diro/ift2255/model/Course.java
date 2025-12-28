@@ -16,7 +16,7 @@ public class Course {
     private Map<String, Boolean> available_terms;
     private Map<String, Boolean> available_periods;
 
-    // Horaires bruts (pas de classe Schedule)
+    // Horaires bruts 
     private List<Object> schedules;
 
     // --- Getters ---
