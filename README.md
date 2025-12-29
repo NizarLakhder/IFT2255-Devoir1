@@ -117,3 +117,10 @@ https://youtu.be/Zj2Tmzm4HTA?si=d2NYkGHUg6zv77T3
 ## d'invitation vers le serveur discord la ou les avis ont été collectés
 
 https://discord.gg/XFYGuvuw
+
+## Répartition des taches
+
+tarek zerroug : Code , Tests , interface graphique , interface pseudo - conversationelle , rapport , documentation , api rest , configuration maven  , démonstration  .
+Nizar Lakhder : Code ( fonctionnalités de l'application ) , Oracle des tests . 
+Alae aloui : diagramme de classe , rapport , conception ( diagramme de classe )
+
