@@ -15,7 +15,7 @@ Modèle : stockage et manipulation des données locales (profils utilisateurs, p
 
 Découpage en modules ou couches
 Le système est organisé en quatre couches principales :
-Interface utilisateur (Front-end) : application web permettant la recherche, la comparaison et la personnalisation des cours.
+Interface utilisateur (Front-end) : application web permettant la recherche, la comparaison e.
 API applicative (Back-end) : point central qui traite les requêtes, applique les règles métier et interagit avec les autres services.
 Sources externes : intégrations avec les API Planifium (catalogue de cours), Discord (avis étudiants) et le système académique (validation des inscriptions).
 Base de données interne : gestion des profils étudiants, préférences, historiques de recherches et agrégation de données.

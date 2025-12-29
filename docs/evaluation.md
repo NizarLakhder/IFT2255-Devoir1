@@ -9,197 +9,261 @@ title: Évaluation et tests
         }
     }
 </style>
+## Oracles de tests – TDD (version mise à jour pour le devoir3)
 
-## Oracles de tests - TDD 
-
-Cette section décrit, pour chaque cas d’utilisation principal, au moins un scénario de test formalisé.  
+Cette section décrit, pour chaque cas d’utilisation couvert par les tests unitaires, au moins un scénario de test formalisé.
 Pour chaque test, on précise les entrées, le résultat attendu et les effets de bord attendus.
 
-### CU1 – Rechercher un cours
+---
 
-Test CU1.1 – Recherche par sigle exact existant
+### CU5 – Consulter les résultats académiques d’un cours
+
+#### Test CU5.1 – Cours inexistant
 
 - Cas d’utilisation couvert  
-  CU1 Rechercher un cours
+  CU5 Consulter les résultats académiques
 
 - Entrées  
-  Sigle saisi: "IFT2255"
+  Appel à ResultatService.getBySigle("COURSE_INEXISTANT")
 
 - Préconditions  
-  L’API Planifium (ou le client HTTP simulé) retourne un JSON contenant au moins un cours avec id = "IFT2255".
+  Le fichier CSV des résultats ne contient aucune entrée avec le sigle "COURSE_INEXISTANT".
 
 - Résultat attendu (valeur de retour)  
-  CourseService.rechercherCours("IFT2255") retourne une liste de taille 1 dont:
-  - element[0].id = "IFT2255"
-  - element[0].name = "Génie logiciel"
-  - element[0].credits = 3.0
+  La méthode retourne Optional.empty().
 
 - Effets de bord attendus  
   Aucun état persistant modifié.  
-  Dans la console, en mode interactif, le système affiche une section “Résultats :” suivie d’une ligne  
-  "- IFT2255 | Génie logiciel (3,0 crédits)".
+  Aucune exception levée.
 
-Test CU1.2 – Aucun cours trouvé
+---
+
+#### Test CU5.2 – Cours existant
 
 - Cas d’utilisation couvert  
-  CU1 Rechercher un cours
+  CU5 Consulter les résultats académiques
 
 - Entrées  
-  Sigle saisi: "XXX0000"
+  Appel à ResultatService.getBySigle("IFT2255")
 
 - Préconditions  
-  L’API Planifium (ou le client simulé) retourne un tableau JSON vide.
+  Le fichier CSV contient une entrée correspondant au cours "IFT2255".
 
 - Résultat attendu (valeur de retour)  
-  CourseService.rechercherCours("XXX0000") retourne une liste vide.
+  La méthode retourne un Optional contenant un ResultatAcademique valide.
 
 - Effets de bord attendus  
-  En console, le message "Aucun cours trouvé." est affiché.  
-  Pas de crash, pas d’exception non gérée.
+  Lecture du fichier CSV uniquement.  
+  Aucun autre effet de bord.
 
-Test CU1.3 – Entrée utilisateur invalide dans le menu
+---
 
-- Cas d’utilisation couvert  
-  CU1 Rechercher un cours (flux alternatif)
-
-- Entrées  
-  Dans le menu principal, l’utilisateur tape "MAT1400" au lieu d’un nombre pour le choix.
-
-- Préconditions  
-  L’application est dans la boucle principale du menu.
-
-- Résultat attendu  
-  Le programme ne plante pas. La saisie est ignorée.
-
-- Effets de bord attendus  
-  Le message "Veuillez entrer un nombre valide." est affiché, puis le menu principal est réaffiché.
-
-### CU2 – Voir les détails d’un cours
-
-Test CU2.1 – Détails d’un cours existant
+#### Test CU5.3 – Sigle null
 
 - Cas d’utilisation couvert  
-  CU2 Voir les détails d’un cours
+  CU5 Consulter les résultats académiques (flux alternatif)
 
 - Entrées  
-  Sigle saisi: "MAT1400"
+  Appel à ResultatService.getBySigle(null)
 
 - Préconditions  
-  L’API retourne un JSON correspondant à un cours avec:
-  - id: "MAT1400"
-  - name: "Calcul 1"
-  - credits: 4.0
-  - description non vide
+  Aucune.
 
 - Résultat attendu (valeur de retour)  
-  CourseService.getCoursParCode("MAT1400") retourne un objet Course non nul avec les valeurs ci-dessus.
+  La méthode retourne Optional.empty().
 
 - Effets de bord attendus  
-  En console, les informations sont affichées sous la forme:
-  - "Sigle : MAT1400"
-  - "Nom : Calcul 1"
-  - "Crédits : 4.0"
-  - "Description : …"
+  Aucun crash.  
+  Aucun accès au fichier CSV.
 
-Test CU2.2 – Cours inexistant
+---
+
+### CU6 – Vérifier l’éligibilité à un cours
+
+#### Test CU6.1 – Échec si un prérequis est manquant
 
 - Cas d’utilisation couvert  
-  CU2 Voir les détails d’un cours (flux d’erreur)
+  CU6 Vérifier l’éligibilité à un cours
 
 - Entrées  
-  Sigle saisi: "ZZZ9999"
+  Course.prerequisite_courses = ["IFT1015"]  
+  EligibilityRequest.completedCourses = ["IFT1025"]  
+  EligibilityRequest.cycle = "bac"
 
 - Préconditions  
-  L’API (ou le client simulé) retourne un code HTTP 404.
+  Aucune.
 
 - Résultat attendu (valeur de retour)  
-  CourseService.getCoursParCode("ZZZ9999") retourne null.
+  EligibilityResult.isEligible = false  
+  EligibilityResult.missingPrerequisites = ["IFT1015"]
 
 - Effets de bord attendus  
-  En console, le message "Cours introuvable." est affiché.  
-  Pas de plantage de l’application.
+  Aucun état persistant modifié.
 
-### CU3 – Comparer des cours
+---
 
-Test CU3.1 – Comparaison de deux cours valides
+#### Test CU6.2 – Échec si le cycle n’est pas baccalauréat
 
 - Cas d’utilisation couvert  
-  CU3 Comparer des cours
+  CU6 Vérifier l’éligibilité à un cours (règle métier)
 
 - Entrées  
-  Sigles saisis: "IFT2255,MAT1400"
+  Course.prerequisite_courses = []  
+  EligibilityRequest.completedCourses = []  
+  EligibilityRequest.cycle = "maitrise"
 
 - Préconditions  
-  - getCoursParCode("IFT2255") retourne un Course pour Génie logiciel, 3 crédits.  
-  - getCoursParCode("MAT1400") retourne un Course pour Calcul 1, 4 crédits.
+  Aucune.
 
 - Résultat attendu (valeur de retour)  
-  CourseService.getCoursParCodes(["IFT2255", "MAT1400"]) retourne une liste de taille 2:  
-  - element[0].id = "IFT2255"  
-  - element[1].id = "MAT1400"
+  EligibilityResult.isEligible = false  
+  EligibilityResult.message = "Cours réservé au baccalauréat"
 
 - Effets de bord attendus  
-  En console, la section "=== Comparaison des cours ===" est affichée, suivie des deux fiches cours formatées:
-  - "IFT2255 : Génie logiciel (3,0 crédits)"  
-  - "MAT1400 : Calcul 1 (4,0 crédits)"
+  Aucun.
 
-Test CU3.2 – Trop peu de cours valides
+---
+
+#### Test CU6.3 – Succès lorsque toutes les conditions sont respectées
 
 - Cas d’utilisation couvert  
-  CU3 Comparer des cours (flux alternatif)
+  CU6 Vérifier l’éligibilité à un cours
 
 - Entrées  
-  Sigles saisis: "IFT2255,XXX0000"
+  Course.prerequisite_courses = ["IFT1015"]  
+  EligibilityRequest.completedCourses = ["IFT1015"]  
+  EligibilityRequest.cycle = "bac"
 
 - Préconditions  
-  - getCoursParCode("IFT2255") retourne un cours valide.  
-  - getCoursParCode("XXX0000") retourne null (404).
+  Aucune.
 
 - Résultat attendu (valeur de retour)  
-  CourseService.getCoursParCodes(["IFT2255", "XXX0000"]) retourne une liste de taille 1.
+  EligibilityResult.isEligible = true  
+  EligibilityResult.message = "Étudiant éligible à ce cours"
 
 - Effets de bord attendus  
-  Dans MainConsole, le système détecte qu’il y a moins de deux cours valides et affiche:  
-  "Veuillez entrer au moins deux cours valides."
+  Aucun.
 
-### CU4 – Consulter les avis d’un cours
+---
 
-Test CU4.1 – Lecture des avis à partir du fichier JSON
+#### Test CU6.4 – Succès sans prérequis
 
 - Cas d’utilisation couvert  
-  CU4 Consulter les avis d’un cours
+  CU6 Vérifier l’éligibilité à un cours
 
 - Entrées  
-  Appel à AvisService.lireAvis() sans argument.
+  Course.prerequisite_courses = []  
+  EligibilityRequest.completedCourses = []  
+  EligibilityRequest.cycle = "bac"
 
 - Préconditions  
-  Le fichier dataDiscord/avis.json existe et contient une liste JSON de plusieurs objets Avis, dont un avec:
-  - cours = "IFT2255"
-  - difficulte = 3
-  - charge = 2
-  - commentaire non vide
+  Aucune.
 
 - Résultat attendu (valeur de retour)  
-  AvisService.lireAvis() retourne une liste non vide contenant un Avis pour le cours "IFT2255" avec les champs correctement mappés.
+  EligibilityResult.isEligible = true
 
 - Effets de bord attendus  
-  Aucun effet de bord autre que la lecture du fichier.  
-  Aucune exception non gérée ne doit être levée si le fichier est bien formaté.
+  Aucun.
 
-Test CU4.2 – Fichier d’avis absent
+---
+
+#### Test CU6.5 – Échec avec plusieurs prérequis dont un manquant
 
 - Cas d’utilisation couvert  
-  CU4 Consulter les avis d’un cours (flux d’erreur)
+  CU6 Vérifier l’éligibilité à un cours (flux alternatif)
 
 - Entrées  
-  Appel à AvisService.lireAvis() alors que le fichier avis.json n’existe pas sur le disque.
+  Course.prerequisite_courses = ["IFT1015", "IFT1025"]  
+  EligibilityRequest.completedCourses = ["IFT1015"]  
+  EligibilityRequest.cycle = "bac"
 
 - Préconditions  
-  Le chemin dataDiscord/avis.json est absent.
+  Aucune.
+
+- Résultat attendu (valeur de retour)  
+  EligibilityResult.isEligible = false  
+  EligibilityResult.missingPrerequisites = ["IFT1025"]
+
+- Effets de bord attendus  
+  Aucun.
+
+---
+
+#### Test CU6.6 – Échec si le cycle est null
+
+- Cas d’utilisation couvert  
+  CU6 Vérifier l’éligibilité à un cours (validation d’entrée)
+
+- Entrées  
+  Course.prerequisite_courses = []  
+  EligibilityRequest.completedCourses = []  
+  EligibilityRequest.cycle = null
+
+- Préconditions  
+  Aucune.
+
+- Résultat attendu (valeur de retour)  
+  EligibilityResult.isEligible = false
+
+- Effets de bord attendus  
+  Aucun.
+
+---
+
+### CU7 – Gérer les avis des étudiants
+
+#### Test CU7.1 – Récupérer uniquement les avis d’un cours donné
+
+- Cas d’utilisation couvert  
+  CU7 Consulter les avis d’un cours
+
+- Entrées  
+  Appel à AvisService.getByCourse("IFT2255")
+
+- Préconditions  
+  Le fichier JSON contient plusieurs avis, dont au moins deux pour "IFT2255".
+
+- Résultat attendu (valeur de retour)  
+  La méthode retourne une liste de taille 2 contenant uniquement des avis du cours "IFT2255".
+
+- Effets de bord attendus  
+  Lecture du fichier JSON uniquement.
+
+---
+
+#### Test CU7.2 – Aucun avis pour le cours demandé
+
+- Cas d’utilisation couvert  
+  CU7 Consulter les avis d’un cours (flux alternatif)
+
+- Entrées  
+  Appel à AvisService.getByCourse("IFT9999")
+
+- Préconditions  
+  Aucun avis n’existe pour ce cours.
 
 - Résultat attendu (valeur de retour)  
   La méthode retourne une liste vide.
 
 - Effets de bord attendus  
-  Un message d’information est éventuellement affiché en console ("Aucun avis encore enregistré").  
-  L’application continue de fonctionner normalement.
+  Aucun.
+
+---
+
+#### Test CU7.3 – Ajout d’un avis
+
+- Cas d’utilisation couvert  
+  CU7 Ajouter un avis
+
+- Entrées  
+  Appel à AvisService.ajouterAvis(Avis("IFT2255", 5, 5, "Excellent", "Bob"))
+
+- Préconditions  
+  Le fichier d’avis est vide ou inexistant.
+
+- Résultat attendu (valeur de retour)  
+  Aucun retour (void).
+
+- Effets de bord attendus  
+  L’avis est persisté dans le fichier JSON.  
+  Un appel ultérieur à getByCourse("IFT2255") retourne une liste contenant cet avis.
