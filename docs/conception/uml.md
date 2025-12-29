@@ -50,7 +50,7 @@ La classe UserService gère les utilisateurs du système. Elle offre des opérat
 
 L’interface IService définit un contrat générique pour les services exposant des opérations CRUD, favorisant la cohérence et la réutilisabilité.
 
-⸻
+_____
 
 Couche contrôleur (controller)
 
