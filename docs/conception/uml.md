@@ -10,56 +10,122 @@ title: Conception - Diagrammes UML
 ![Diagramme de classe](../../besoins/diagrammes/diagrammedeclasse.jpg)
 
 
-⸻
-
 CourseController – CourseService
 
+_____
+
 Cardinalité : 1 ↔ 1
-Chaque CourseController utilise un seul CourseService pour exécuter les opérations sur les cours. Le service est injecté comme dépendance dans le contrôleur et contient toute la logique métier.
 
-⸻
+Chaque CourseController est associé à une unique instance de CourseService.
+Le contrôleur délègue toutes les opérations liées aux cours (recherche, comparaison, vérification d’éligibilité) au service.
+Le CourseService contient la logique métier et l’accès aux données externes (API distante), tandis que le contrôleur se limite à la gestion des requêtes HTTP.
+_____
 
-CourseService – Cours
+
+
+CourseService – Course
 
 Cardinalité : 1 ↔ 0..*
-Un CourseService gère plusieurs objets Cours, par exemple lorsqu’il recherche ou compare des cours. Chaque cours appartient logiquement au service qui le manipule.
 
-⸻
+Un CourseService manipule plusieurs objets Course, par exemple lors de la récupération d’une liste de cours ou de la comparaison de plusieurs cours.
+Chaque objet Course représente une entité métier décrivant un cours (id, nom, crédits, prérequis, horaires).
+Les cours sont utilisés par le service mais restent indépendants de celui-ci.
+
+_____
+
+CourseService – EligibilityResult
+
+Cardinalité : 1 ↔ 0..*
+
+Le CourseService produit des objets EligibilityResult lors des vérifications d’éligibilité d’un étudiant à un cours.
+Chaque EligibilityResult contient l’état d’éligibilité ainsi que les prérequis manquants.
+Ces objets servent uniquement de résultat métier et sont générés à la demande par le service.
+
+_____
 
 AvisController – AvisService
 
 Cardinalité : 1 ↔ 1
-Le AvisController interagit avec un unique AvisService. Ce service contient les méthodes permettant d’ajouter ou de récupérer des avis depuis un fichier JSON.
 
-⸻
+Le AvisController est lié à une seule instance de AvisService.
+Le contrôleur reçoit les requêtes liées aux avis (création, consultation) et délègue leur traitement au service.
+Le AvisService gère la persistance des avis dans un fichier JSON.
+
+_____
 
 AvisService – Avis
 
 Cardinalité : 1 ↔ 0..*
-Un AvisService gère une collection d’avis (lecture et écriture). Chaque Avis est créé ou lu par ce service.
 
-⸻
+Un AvisService gère une collection d’objets Avis.
+Chaque Avis représente l’évaluation d’un cours par un utilisateur (difficulté, charge, commentaire, auteur).
+Les avis sont créés, lus et mis à jour exclusivement via le service.
+
+_____
 
 UserController – UserService
 
 Cardinalité : 1 ↔ 1
-Chaque UserController possède une seule instance de UserService. Ce dernier regroupe toutes les opérations liées aux utilisateurs (création, mise à jour, suppression).
 
-⸻
+Chaque UserController possède une seule instance de UserService.
+Le contrôleur se charge des interactions HTTP tandis que le service encapsule toute la logique métier liée aux utilisateurs (création, mise à jour, suppression).
+
+_____
 
 UserService – User
 
 Cardinalité : 1 ↔ 0..*
-Le UserService maintient une liste d’utilisateurs dans une structure de type Map. Chaque User est manipulé via ce service unique.
 
-⸻
+Le UserService maintient une collection d’objets User, stockée dans une structure de type Map.
+Chaque User représente un utilisateur du système avec ses informations personnelles (id, nom, email).
+Les utilisateurs sont manipulés uniquement via le service.
 
-IService – (Services)
+_____
 
-Relation : implémentation (héritage)
-Les classes CourseService, AvisService et UserService implémentent l’interface générique IService<T> afin d’assurer une structure commune aux opérations CRUD.
+ResultatController – ResultatService
 
+Cardinalité : 1 ↔ 1
 
+Le ResultatController est associé à un unique ResultatService.
+Il permet de récupérer les résultats académiques d’un étudiant à partir de son identifiant.
+Toute la logique d’accès aux données est centralisée dans le service.
+
+_____
+
+ResultatService – ResultatAcademique
+
+Cardinalité : 1 ↔ 0..*
+
+Le ResultatService gère des objets ResultatAcademique, lus depuis un fichier CSV.
+Chaque résultat académique contient les informations scolaires d’un étudiant (programme, moyenne, score, crédits).
+Ces objets sont fournis en lecture seule par le service.
+
+_____
+
+ProgramController – ProgramService
+
+Cardinalité : 1 ↔ 1
+
+Le ProgramController interagit avec une unique instance de ProgramService.
+Le service se charge de la récupération des informations de programmes à partir d’une API externe.
+
+_____
+
+ProgramService 
+
+Cardinalité : 1 ↔ 0..*
+
+Le ProgramService manipule des objets représentant des programmes académiques récupérés depuis une API distante.
+Ces objets sont utilisés comme données de consultation.
+
+_____
+
+IService – Services (CourseService, AvisService, UserService)
+
+Relation : Implémentation (héritage d’interface)
+
+Les classes CourseService, AvisService et UserService implémentent l’interface générique IService.
+Cette interface définit un ensemble commun d’opérations CRUD (create, read, update, delete) afin d’assurer une structure uniforme et cohérente entre les différents services
 
 ## Diagrammes de séquence
 
