@@ -122,5 +122,5 @@ https://discord.gg/XFYGuvuw
 
 tarek zerroug : Code , Tests , interface graphique , interface pseudo - conversationelle , rapport , documentation , api rest , configuration maven  , démonstration  .
 Nizar Lakhder : Code ( fonctionnalités de l'application ) , Oracle des tests . 
-Alae aloui : diagramme de classe , rapport , conception ( diagramme de classe )
+Alae aloui : diagramme de classe , rapport , conception ( diagramme de classe ) , code .
 
